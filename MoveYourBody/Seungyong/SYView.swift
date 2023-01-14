@@ -59,15 +59,14 @@ struct SYView: View {
         Button {
             
         } label: {
-            Text("움직여요!")
-                .fontWeight(.bold)
-                .font(.title)
+            Text("START")
+                .font(.system(size: 40, weight: .bold))
                 .padding()
+                .frame(width: 200, height: 200)
+                .foregroundColor(.black)
+                .background(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .clipShape(Circle())
         }
-        .frame(maxWidth: 250)
-        .foregroundColor(Color("buttonForeground"))
-        .background(Color("buttonBackground"))
-        .cornerRadius(40)
     }
     
     @ViewBuilder
@@ -75,8 +74,8 @@ struct SYView: View {
         Button {
             
         } label: {
-            Image(systemName: "gearshape")
-                .font(.system(size: 44, weight: .regular))
+            Image(systemName: "gearshape.fill")
+                .font(.system(size: 44, weight: .light))
                 .foregroundColor(Color("symbolForeground"))
         }
     }
@@ -86,7 +85,7 @@ struct SYView: View {
         Button {
             
         } label: {
-            Image(systemName: "trophy")
+            Image(systemName: "figure.run")
                 .font(.system(size: 44, weight: .regular))
                 .foregroundColor(Color("symbolForeground"))
         }
