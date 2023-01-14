@@ -9,8 +9,89 @@ import SwiftUI
 
 struct SYView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
+            
+            VStack {
+                
+                Spacer()
+                    .frame(height: 100)
+                mainTitle()
+                VStack(spacing: 80) {
+                    Spacer()
+
+                    startButton()
+                    
+                    HStack {
+                        acheivementsButton()
+                            .padding()
+                        Spacer()
+                        settingsButton()
+                            .padding()
+                    }
+                    
+                }
+               
+                
+            }
+        }
     }
+    
+    @ViewBuilder
+    func mainTitle() -> some View {
+        VStack {
+            Text("MOVE")
+                .font(.system(size: 45, weight: .heavy))
+                .offset(x: -20)
+            Text("YOUR")
+                .font(.system(size: 35, weight: .bold))
+                .offset(x: 25)
+            Text("BODY!!")
+                .font(.italic(.system(size: 65, weight: .heavy))())
+                .offset(x: 20)
+        }
+        .foregroundColor(Color("titleForeground"))
+    }
+    
+    @ViewBuilder
+    func startButton() -> some View {
+        Button {
+            
+        } label: {
+            Text("움직여요!")
+                .fontWeight(.bold)
+                .font(.title)
+                .padding()
+        }
+        .frame(maxWidth: 250)
+        .foregroundColor(Color("buttonForeground"))
+        .background(Color("buttonBackground"))
+        .cornerRadius(40)
+    }
+    
+    @ViewBuilder
+    func settingsButton() -> some View {
+        Button {
+            
+        } label: {
+            Image(systemName: "gearshape")
+                .font(.system(size: 44, weight: .regular))
+                .foregroundColor(Color("symbolForeground"))
+        }
+    }
+    
+    @ViewBuilder
+    func acheivementsButton() -> some View {
+        Button {
+            
+        } label: {
+            Image(systemName: "trophy")
+                .font(.system(size: 44, weight: .regular))
+                .foregroundColor(Color("symbolForeground"))
+        }
+    }
+    
 }
 
 struct SYView_Previews: PreviewProvider {
