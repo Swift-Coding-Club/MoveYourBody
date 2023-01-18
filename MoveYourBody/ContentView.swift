@@ -14,6 +14,8 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+            Button("bordered") { }
+            .buttonStyle(.bordered)
         }
         .padding()
     }
