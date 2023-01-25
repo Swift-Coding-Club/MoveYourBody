@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NangView: View {
-
+    
     @State private var showSheet = false
     @State private var selectedDate = Date()
 
@@ -17,7 +17,6 @@ struct NangView: View {
 
     var body: some View {
         ZStack {
-            
             VStack(spacing: 70) {
                 settingBar()
             }
@@ -36,7 +35,12 @@ struct NangView: View {
                 }
             }
             .navigationBarTitle("운동 알림")
-            .navigationBarItems(leading: EditButton())
+            .navigationBarItems(leading: Button {
+            } label: {
+                Image(systemName: "arrowshape.turn.up.backward.fill")
+            }.buttonStyle(customButton())
+            )
+            .navigationBarItems(trailing: EditButton())
             .navigationBarItems(trailing: Button {
                 self.showSheet = true
             } label: {
@@ -59,8 +63,16 @@ struct NangView: View {
                 .navigationBarTitle("새로운 알람", displayMode: .inline)
                 .navigationBarItems(leading: Button(action: {
                         self.showSheet = false}) {Text("취소")},
-                    trailing: Button(action: {
-                        print("저장")}) {Text("저장")})
+                                    trailing: Button{ } label: {Text("저장")})
+        }
+    }
+    
+    struct customButton: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .foregroundColor(.green)
+                .padding()
+                .scaleEffect(configuration.isPressed ? 0.9 : 1)
         }
     }
 }
