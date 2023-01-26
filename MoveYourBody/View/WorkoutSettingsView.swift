@@ -19,7 +19,7 @@ class CoreDataViewModel: ObservableObject{
             }else{
                 print("Successfully loaded core data")
             }
-            }
+        }
         fetchWorkout()
     }
     
@@ -47,7 +47,8 @@ class CoreDataViewModel: ObservableObject{
         }
     }
 }
-struct MandoView: View {
+
+struct WorkoutSettingsView: View {
     @State private var buttonBackColor: Color = Color("neongreen")
     
     @StateObject var vm = CoreDataViewModel()
@@ -95,23 +96,25 @@ struct MandoView: View {
                     UINavigationBarAppearance()
                         .setColor(title: .white, background: .black)
                 }
-               
-        }.navigationBarBackButtonHidden(true)}
-        }
-    @ViewBuilder
-    func saveButton() -> some View {
-        Button {
             
-        } label: {
-            Text("Save")
-                .foregroundColor(Color.white)
-                .font(.system(size:14).bold())
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                    
-        }
+        }.navigationBarBackButtonHidden(true)}
+}
+
+@ViewBuilder
+func saveButton() -> some View {
+    Button {
+        
+    } label: {
+        Text("Save")
+            .foregroundColor(Color.white)
+            .font(.system(size:14).bold())
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
+        
     }
+}
+
 @ViewBuilder
 func optionFirstButton() -> some View {
     Button {
@@ -123,7 +126,7 @@ func optionFirstButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
 
@@ -138,7 +141,7 @@ func mnFirstButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
 
@@ -153,9 +156,10 @@ func mnSecondButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
+
 @ViewBuilder
 func mnThirdButton() -> some View {
     Button {
@@ -167,7 +171,7 @@ func mnThirdButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
 
@@ -182,7 +186,7 @@ func mnFourthButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
 
@@ -197,9 +201,10 @@ func mnFifthButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
+
 @ViewBuilder
 func optionSecondButton() -> some View {
     Button {
@@ -211,9 +216,10 @@ func optionSecondButton() -> some View {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-                
+        
     }
 }
+
 struct OutlineButtonSytle: ButtonStyle{
     static let neongreen=Color("neon-green")
     func makeBody(configuration: Configuration) -> some View {
@@ -226,7 +232,7 @@ struct OutlineButtonSytle: ButtonStyle{
                     .stroke(OutlineButtonSytle.neongreen, lineWidth: 3)
             )
     }
-    }
+}
 
 extension UINavigationBarAppearance {
     func setColor(title: UIColor? = nil, background: UIColor? = nil) {
@@ -240,9 +246,10 @@ extension UINavigationBarAppearance {
         UINavigationBar.appearance().standardAppearance = self
     }
 }
-    struct MandoView_Previews: PreviewProvider {
-        static var previews: some View {
-            MandoView()
-        }
+
+struct MandoView_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkoutSettingsView()
     }
+}
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SYView: View {
+struct MainView: View {
     var body: some View {
         ZStack {
             Color("background")
@@ -95,6 +95,6 @@ struct SYView: View {
 
 struct SYView_Previews: PreviewProvider {
     static var previews: some View {
-        SYView()
+        MainView()
     }
 }

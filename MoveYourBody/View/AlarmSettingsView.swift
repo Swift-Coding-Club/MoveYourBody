@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NangView: View {
+struct AlarmSettingsView: View {
     
     @State private var showSheet = false
     @State private var selectedDate = Date()
@@ -79,6 +79,6 @@ struct NangView: View {
 
 struct NangView_Previews: PreviewProvider {
     static var previews: some View {
-        NangView()
+        AlarmSettingsView()
     }
 }
