@@ -37,7 +37,7 @@ struct NangView: View {
             .navigationBarTitle("운동 알림")
             .navigationBarItems(leading: Button {
             } label: {
-                Image(systemName: "arrowshape.turn.up.backward.fill")
+                Image(systemName: "arrowshape.backward.fill")
             }.buttonStyle(customButton())
             )
             .navigationBarItems(trailing: EditButton())
