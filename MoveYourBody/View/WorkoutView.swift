@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VideoView: View {
+struct WorkoutView: View {
     var body: some View {
         ZStack {
             Color.black
@@ -69,6 +69,6 @@ struct VideoView: View {
 
 struct VideoView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoView()
+        WorkoutView()
     }
 }
