@@ -11,7 +11,10 @@ import SwiftUI
 struct MoveYourBodyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                AlarmSettingsView()
+            }
+            .accentColor(.primary)
         }
     }
 }
