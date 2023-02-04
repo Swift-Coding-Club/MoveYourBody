@@ -8,17 +8,30 @@
 import SwiftUI
 
 struct WorkoutView: View {
-    var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            VStack(spacing: 70) {
-                secondCount()
-                exerciseImage()
-                showDescription()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack: some View{
+        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+            HStack{
+                Image("go-back")
             }
         }
+    }
+    var body: some View {
+        workoutScene()
+    }
+    @ViewBuilder
+    func workoutScene() -> some View {
+        NavigationView {
+            ZStack{
+                Color.black
+                    .ignoresSafeArea()
+                VStack(spacing:70) {
+                    secondCount()
+                    exerciseImage()
+                    showDescription()
+                }}
+            .navigationBarItems(leading: btnBack)
+        }.navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
