@@ -10,10 +10,9 @@ import SwiftUI
 
 struct WorkoutSettingsView: View {
     @State private var buttonBackColor: Color = Color("neongreen")
-    
     @StateObject var vm = ViewModel()
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var btnBack: some View{
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
@@ -21,6 +20,7 @@ struct WorkoutSettingsView: View {
             }
         }
     }
+    
     var body: some View {
         ZStack{
             Color("background")
@@ -42,14 +42,11 @@ struct WorkoutSettingsView: View {
                     }
                 }
             }
-            
-            
-        }.navigationBarTitle("운동설정")
-            .navigationBarItems(leading:
-                                    btnBack, trailing: saveButton())
-        
-        
-        .navigationBarBackButtonHidden(true)}
+        }
+        .navigationBarTitle("운동설정")
+        .navigationBarItems(leading: btnBack, trailing: saveButton())
+        .navigationBarBackButtonHidden(true)
+    }
 }
 
 @ViewBuilder
