@@ -14,7 +14,14 @@ struct AlarmSettingsView: View {
 
     //UI 예시
     @State private var setAlarm1 = false
-
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack: some View{
+        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+            HStack{
+                Image("go-back")
+            }
+        }
+    }
     var body: some View {
         ZStack {
             VStack(spacing: 70) {
@@ -35,11 +42,7 @@ struct AlarmSettingsView: View {
                 }
             }
             .navigationBarTitle("운동 알림")
-            .navigationBarItems(leading: Button {
-            } label: {
-                Image(systemName: "arrowshape.backward.fill")
-            }.buttonStyle(customButton())
-            )
+            .navigationBarItems(leading: btnBack)
             .navigationBarItems(trailing: EditButton())
             .navigationBarItems(trailing: Button {
                 self.showSheet = true
@@ -50,7 +53,7 @@ struct AlarmSettingsView: View {
                     plusAlarm()
                         .preferredColorScheme(.dark)
                 })
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 
     func plusAlarm() -> some View {
@@ -64,7 +67,7 @@ struct AlarmSettingsView: View {
                 .navigationBarItems(leading: Button(action: {
                         self.showSheet = false}) {Text("취소")},
                                     trailing: Button{ } label: {Text("저장")})
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     
     struct customButton: ButtonStyle {

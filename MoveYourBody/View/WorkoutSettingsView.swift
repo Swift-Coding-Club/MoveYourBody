@@ -6,52 +6,12 @@
 //
 
 import SwiftUI
-import CoreData
 
-class CoreDataViewModel: ObservableObject{
-    let container: NSPersistentContainer
-    @Published var savedEntities: [WorkoutEntity]=[]
-    init(){
-        container = NSPersistentContainer(name: "WorkoutContainer")
-        container.loadPersistentStores { (description,error) in
-            if let error = error{
-                print("ERROR LOADING CORE DATA. \(error)")
-            }else{
-                print("Successfully loaded core data")
-            }
-        }
-        fetchWorkout()
-    }
-    
-    func fetchWorkout(){
-        let request = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
-        do{
-            savedEntities = try container.viewContext.fetch(request)
-        }catch let error{
-            print("Error fetching. \(error)")
-        }
-    }
-    
-    func addWorkout(text: String){
-        let newWorkout = WorkoutEntity(context: container.viewContext)
-        newWorkout.type = text
-        saveData()
-    }
-    
-    func saveData(){
-        do{
-            try container.viewContext.save()
-            fetchWorkout()
-        }catch let error{
-            print("Error saving. \(error)")
-        }
-    }
-}
 
 struct WorkoutSettingsView: View {
     @State private var buttonBackColor: Color = Color("neongreen")
     
-    @StateObject var vm = CoreDataViewModel()
+    @StateObject var vm = ViewModel()
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack: some View{
@@ -66,25 +26,21 @@ struct WorkoutSettingsView: View {
             ZStack{
                 Color("background")
                     .ignoresSafeArea()
-                VStack(spacing:30){
-                    Text("1회에 몇 분 운동하고 싶으세요?")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
-                    HStack(spacing:20){
-                        optionFirstButton()
-                        optionSecondButton()
-                    }
-                    Text("하고 싶지 않은 동작이 있나요?")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
-                    HStack(spacing:20){
-                        mnFirstButton()
-                        mnSecondButton()
-                        mnThirdButton()
-                    }
-                    HStack(spacing:20){
-                        mnFourthButton()
-                        mnFifthButton()
+                VStack {
+                    ForEach(vm.filteredItems){
+                        item in HStack{
+                            Button(action:{
+                                vm.toggleCheck(item: item)
+                            }){
+                                Text(item.title)
+                                    .font(.headline)
+                            }
+                            .foregroundColor(Color.black)
+                                .font(.system(size:14).bold())
+                                .padding(15)
+                                .background(vm.contains(item) ? Color.green: Color.red)
+                                
+                        }
                     }
                 }
                 
@@ -92,10 +48,7 @@ struct WorkoutSettingsView: View {
             }.navigationBarTitle("운동설정")
                 .navigationBarItems(leading:
                                         btnBack, trailing: saveButton())
-                .onAppear {
-                    UINavigationBarAppearance()
-                        .setColor(title: .white, background: .black)
-                }
+                
             
         }.navigationBarBackButtonHidden(true)}
 }
