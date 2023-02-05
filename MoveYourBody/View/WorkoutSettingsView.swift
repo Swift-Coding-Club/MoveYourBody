@@ -22,35 +22,34 @@ struct WorkoutSettingsView: View {
         }
     }
     var body: some View {
-        NavigationView{
-            ZStack{
-                Color("background")
-                    .ignoresSafeArea()
-                VStack {
-                    ForEach(vm.filteredItems){
-                        item in HStack{
-                            Button(action:{
-                                vm.toggleCheck(item: item)
-                            }){
-                                Text(item.title)
-                                    .font(.headline)
-                            }
-                            .foregroundColor(Color.black)
-                                .font(.system(size:14).bold())
-                                .padding(15)
-                                .background(vm.contains(item) ? Color.green: Color.red)
-                                
+        ZStack{
+            Color("background")
+                .ignoresSafeArea()
+            VStack {
+                ForEach(vm.filteredItems){
+                    item in HStack{
+                        Button(action:{
+                            vm.toggleCheck(item: item)
+                        }){
+                            Text(item.title)
+                                .font(.headline)
                         }
+                        .foregroundColor(Color.black)
+                        .font(.system(size:14).bold())
+                        .padding(15)
+                        .background(vm.contains(item) ? Color.green: Color.red)
+                        
                     }
                 }
-                
-                
-            }.navigationBarTitle("운동설정")
-                .navigationBarItems(leading:
-                                        btnBack, trailing: saveButton())
-                
+            }
             
-        }.navigationBarBackButtonHidden(true)}
+            
+        }.navigationBarTitle("운동설정")
+            .navigationBarItems(leading:
+                                    btnBack, trailing: saveButton())
+        
+        
+        .navigationBarBackButtonHidden(true)}
 }
 
 @ViewBuilder

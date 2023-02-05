@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct WorkoutView: View {
-
+    
     @Environment(\.scenePhase) var scenePhase   // 앱이 백그라운드에 있는지, 포어그라운드에 있는지 알기 위한 변수
     @StateObject private var workoutViewModel = WorkoutViewModel()
     @State private var startCount = true    // 카운트 시작을 결정하는 변수
     @State private var isAppActive = true
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var btnBack: some View{
+        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+            HStack{
+                Image("go-back")
+                
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -37,32 +47,10 @@ struct WorkoutView: View {
                     }
                 exerciseImage()
                 showDescription()
-
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var btnBack: some View{
-        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
-            HStack{
-                Image("go-back")
-
             }
         }
-    }
-    var body: some View {
-        workoutScene()
-    }
-    @ViewBuilder
-    func workoutScene() -> some View {
-        NavigationView {
-            ZStack{
-                Color.black
-                    .ignoresSafeArea()
-                VStack(spacing:70) {
-                    secondCount()
-                    exerciseImage()
-                    showDescription()
-                }}
-            .navigationBarItems(leading: btnBack)
-        }.navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+        .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
@@ -80,7 +68,7 @@ struct WorkoutView: View {
             Image(systemName: "figure.strengthtraining.functional")
                 .font(.system(size: 150))
                 .foregroundColor(.white)
-                
+            
             Circle()
                 .stroke(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 10)
                 .frame(width: 250, height: 250)

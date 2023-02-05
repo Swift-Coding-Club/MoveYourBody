@@ -12,9 +12,8 @@ struct MoveYourBodyApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                AlarmSettingsView()
+                ContentView()
             }
-            .accentColor(.primary)
         }
     }
 }

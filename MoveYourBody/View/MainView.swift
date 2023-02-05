@@ -9,33 +9,31 @@ import SwiftUI
 
 struct MainView: View { 
     var body: some View {
-        NavigationView{
-            ZStack {
-                Color("background")
-                    .ignoresSafeArea()
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
+            
+            VStack {
                 
-                VStack {
-                    
+                Spacer()
+                    .frame(height: 100)
+                mainTitle()
+                VStack(spacing: 80) {
                     Spacer()
-                        .frame(height: 100)
-                    mainTitle()
-                    VStack(spacing: 80) {
+                    
+                    startButton()
+                    
+                    HStack {
+                        acheivementsButton()
+                            .padding()
                         Spacer()
-                        
-                        startButton()
-                        
-                        HStack {
-                            acheivementsButton()
-                                .padding()
-                            Spacer()
-                            settingsButton()
-                                .padding()
-                        }
-                        
+                        settingsButton()
+                            .padding()
                     }
                     
-                    
                 }
+                
+                
             }
         }
     }
@@ -80,18 +78,18 @@ struct MainView: View {
             .padding()
     }
     
-
+    
     @ViewBuilder
     func acheivementsButton() -> some View {
         NavigationLink(destination: WorkoutSettingsView()) {
-                
-                Image(systemName: "figure.run")
-                    .font(.system(size: 44, weight: .regular))
-                    .foregroundColor(Color("symbolForeground"))
-            }
-            .navigationBarHidden(true)
-            .padding()
-        }}
+            
+            Image(systemName: "figure.run")
+                .font(.system(size: 44, weight: .regular))
+                .foregroundColor(Color("symbolForeground"))
+        }
+        .navigationBarHidden(true)
+        .padding()
+    }}
 struct SYView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
