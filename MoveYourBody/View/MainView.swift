@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MainView: View { 
     var body: some View {
         ZStack {
             Color("background")
@@ -20,7 +20,7 @@ struct MainView: View {
                 mainTitle()
                 VStack(spacing: 80) {
                     Spacer()
-
+                    
                     startButton()
                     
                     HStack {
@@ -32,12 +32,11 @@ struct MainView: View {
                     }
                     
                 }
-               
+                
                 
             }
         }
     }
-    
     @ViewBuilder
     func mainTitle() -> some View {
         VStack {
@@ -56,9 +55,7 @@ struct MainView: View {
     
     @ViewBuilder
     func startButton() -> some View {
-        Button {
-            
-        } label: {
+        NavigationLink(destination: WorkoutView()){
             Text("START")
                 .font(.system(size: 40, weight: .bold))
                 .padding()
@@ -66,33 +63,33 @@ struct MainView: View {
                 .foregroundColor(.black)
                 .background(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .clipShape(Circle())
-        }
+        }.navigationBarHidden(true)
+            .padding()
     }
     
     @ViewBuilder
     func settingsButton() -> some View {
-        Button {
-            
-        } label: {
+        
+        NavigationLink(destination: AlarmSettingsView()){
             Image(systemName: "gearshape.fill")
                 .font(.system(size: 44, weight: .light))
                 .foregroundColor(Color("symbolForeground"))
-        }
+        }.navigationBarHidden(true)
+            .padding()
     }
+    
     
     @ViewBuilder
     func acheivementsButton() -> some View {
-        Button {
+        NavigationLink(destination: WorkoutSettingsView()) {
             
-        } label: {
             Image(systemName: "figure.run")
                 .font(.system(size: 44, weight: .regular))
                 .foregroundColor(Color("symbolForeground"))
         }
-    }
-    
-}
-
+        .navigationBarHidden(true)
+        .padding()
+    }}
 struct SYView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
