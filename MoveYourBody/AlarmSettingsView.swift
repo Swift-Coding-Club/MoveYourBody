@@ -69,6 +69,8 @@ struct AlarmSettingsView: View {
                     }
                     .onDelete(perform: delete)
                 }
+                .scrollContentBackground(.hidden)
+                .background(.yellow)
                 .listStyle(InsetGroupedListStyle())
                 .overlay(infoOverlayView)
                 .navigationTitle("운동 알림")
