@@ -8,7 +8,7 @@
 import Foundation
 extension WorkoutSettingsView {
     
-    final class ViewModel: ObservableObject{
+    final class ContentViewModel: ObservableObject{
         @Published var items = [Item]()
         @Published var showingChecked = false //
         @Published var savedItems: Set<Int> = [1,7]//디폴트 체크

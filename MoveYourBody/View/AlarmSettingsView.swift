@@ -52,7 +52,16 @@ struct AlarmSettingsView: View {
             EmptyView()
         }
     }
+    //메인뷰로 돌아가는 버튼: navigation link가 아닌 binding을 이용해 이 화면을 없애서 돌아감
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    var btnBack: some View{
+        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+            HStack{
+                Image("go-back")
+            }.navigationBarBackButtonHidden(true)
+        }
+    }
     var body: some View {
         ZStack {
             Color.yellow
@@ -87,11 +96,7 @@ struct AlarmSettingsView: View {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                     notificationManager.reloadAuthorizationStatus()
                 }
-                .navigationBarItems(leading: Button {
-                    
-                } label: {
-                    Image("go-back")
-                })
+                .navigationBarItems(leading:btnBack )
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
                 } label: {

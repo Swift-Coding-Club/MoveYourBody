@@ -10,18 +10,19 @@ import SwiftUI
 
 struct WorkoutSettingsView: View {
     @State private var buttonBackColor: Color = Color("neongreen")
-    @StateObject var vm = ViewModel()
+    @StateObject var vm = ContentViewModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var btnBack: some View{
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
                 Image("go-back")
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
     
     var body: some View {
+        NavigationView{
         ZStack{
             Color("background")
                 .ignoresSafeArea()
@@ -42,10 +43,11 @@ struct WorkoutSettingsView: View {
                     }
                 }
             }
-        }
-        .navigationBarTitle("운동설정")
-        .navigationBarItems(leading: btnBack, trailing: saveButton())
-        .navigationBarBackButtonHidden(true)
+                .navigationTitle("Hi")
+                .foregroundColor(Color.white)
+                .navigationBarItems(leading: btnBack, trailing: saveButton())
+            }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
@@ -57,6 +59,7 @@ func saveButton() -> some View {
         Text("Save")
             .foregroundColor(Color.white)
             .font(.system(size:14).bold())
+            .multilineTextAlignment(.center)
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
