@@ -64,7 +64,7 @@ struct AlarmSettingsView: View {
     
     var body: some View {
         ZStack {
-            Color.yellow
+            Color.black
                 .ignoresSafeArea()
             
             VStack(spacing: 70) {
@@ -78,6 +78,8 @@ struct AlarmSettingsView: View {
                     }
                     .onDelete(perform: delete)
                 }
+                .scrollContentBackground(.hidden)
+                .background(.black)
                 .listStyle(InsetGroupedListStyle())
                 .overlay(infoOverlayView)
                 .navigationTitle("운동 알림")
@@ -100,8 +102,10 @@ struct AlarmSettingsView: View {
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
                 } label: {
-                    Image(systemName: "plus.circle")
-                        .imageScale(.large)
+                    Text("add")
+                        //.imageScale(.large)
+                        .foregroundColor(.white)
+                        
                 })
                 .navigationBarBackButtonHidden(true)
                 .sheet(isPresented: $isCreatePresented) {
@@ -110,8 +114,8 @@ struct AlarmSettingsView: View {
                             notificationManager: notificationManager,
                             isPresented: $isCreatePresented)
                     }
-                    .accentColor(.primary)
                 }
+                .padding(.horizontal, 16)
             }
         }
     }
