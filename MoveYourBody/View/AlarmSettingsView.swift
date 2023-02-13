@@ -58,7 +58,7 @@ struct AlarmSettingsView: View {
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
                 Image("go-back")
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
     
