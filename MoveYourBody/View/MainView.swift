@@ -1,4 +1,4 @@
-    //
+//
 //  SYView.swift
 //  MoveYourBody
 //
@@ -63,7 +63,7 @@ struct MainView: View {
                 .foregroundColor(.black)
                 .background(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .clipShape(Circle())
-        }   .navigationBarHidden(true)
+        }.navigationBarHidden(true)
             .padding()
     }
     
