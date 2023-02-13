@@ -30,6 +30,15 @@ struct WorkoutSettingsView: View {
         }
     }
     var squat = Foundation.UserDefaults.standard.bool(forKey: "isClicked")
+    
+    init() {
+           //Use this if NavigationBarTitle is with Large Font
+           UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+           //Use this if NavigationBarTitle is with displayMode = .inline
+           UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+       }
+    
     var body: some View{
         NavigationView{
             ZStack{
@@ -45,8 +54,13 @@ struct WorkoutSettingsView: View {
                                 Text("스쿼트")
                                     .padding()
                             }
-                            .background(didTap1 ? Color.red : Color.green)
+                            .background(didTap1 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
+                            
                             
                             Button(action:{
                                 self.didTap2.toggle()
@@ -54,8 +68,12 @@ struct WorkoutSettingsView: View {
                                 Text("플랭크")
                                     .padding()
                             }
-                            .background(didTap2 ? Color.red : Color.green)
+                            .background(didTap2 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                             
                             Button(action:{
                                 self.didTap3.toggle()
@@ -63,28 +81,39 @@ struct WorkoutSettingsView: View {
                                 Text("런지")
                                     .padding()
                             }
-                            .background(didTap3 ? Color.red : Color.green)
+                            .background(didTap3 ? Color("background") : Color.green)
                             .cornerRadius(18)
-                            
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                         }
                         HStack{
                             Button(action:{
                                 self.didTap4.toggle()
                             }){
-                                Text("허리 굽히기")
+                                Text("상체")
                                     .padding()
                             }
-                            .background(didTap4 ? Color.red : Color.green)
+                            .background(didTap4 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                             
                             Button(action:{
                                 self.didTap5.toggle()
                             }){
-                                Text("무릎 굽히기")
+                                Text("하체")
                                     .padding()
                             }
-                            .background(didTap5 ? Color.red : Color.green)
+                            .background(didTap5 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                         }
                     }
                     
@@ -97,8 +126,12 @@ struct WorkoutSettingsView: View {
                                 Text("3분 이하")
                                     .padding()
                             }
-                            .background(didTap6 ? Color.red : Color.green)
+                            .background(didTap6 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                             
                             Button(action:{
                                 self.didTap7.toggle()
@@ -106,26 +139,23 @@ struct WorkoutSettingsView: View {
                                 Text("5분 이하")
                                     .padding()
                             }
-                            .background(didTap7 ? Color.red : Color.green)
+                            .background(didTap7 ? Color("background") : Color.green)
                             .cornerRadius(18)
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.green, lineWidth: 3)
+                                    )
                         }
                         
                     }
                     
                 }
+                .navigationTitle("운동 설정")
                 .foregroundColor(Color.white)
                                 .navigationBarItems(leading: btnBack)
                                 
             }
-        }.navigationBarBackButtonHidden()
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Title")
-                        .font(.largeTitle.bold())
-                        .accessibilityAddTraits(.isHeader)
-                }
-            }
+        }
         
     }
 }

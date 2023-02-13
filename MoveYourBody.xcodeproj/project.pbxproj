@@ -24,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BC8DB37299A2AF3004AF4C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		604EAB8A2987E773008CFE22 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		6054FC54298245BF00059CD3 /* WorkoutContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutContainer.xcdatamodel; sourceTree = "<group>"; };
 		6054FC5C29824AB700059CD3 /* WorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		609D4DE82969357E009B2381 /* MoveYourBody */ = {
 			isa = PBXGroup;
 			children = (
+				4BC8DB37299A2AF3004AF4C5 /* Info.plist */,
 				609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */,
 				609D4DEB2969357E009B2381 /* ContentView.swift */,
 				6054FC59298246D700059CD3 /* Utilities */,
@@ -350,6 +352,7 @@
 				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoveYourBody/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -379,6 +382,7 @@
 				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoveYourBody/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
