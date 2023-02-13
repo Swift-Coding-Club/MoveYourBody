@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
-
-struct MainView: View { 
+enum DefaultSettings {
+    static let didTap1 = false
+}
+struct MainView: View {
+    //만약 버튼 클릭여부를 사용하고 싶다면 주석을 풀고 활용하시면 됩니다. 버튼 !~7번 순서대로 didTap1~didTap7로 클릭여부를 저장했습니다. @AppStorage("toggle1") var didTap1: Bool = DefaultSettings.didTap1
+    
     var body: some View {
         ZStack {
             Color("background")
                 .ignoresSafeArea()
             
             VStack {
-                
-                Spacer()
-                    .frame(height: 100)
+                Spacer().frame(height: 100)
                 mainTitle()
                 VStack(spacing: 80) {
                     Spacer()
