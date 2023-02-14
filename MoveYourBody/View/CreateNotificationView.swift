@@ -25,32 +25,11 @@ struct CreateNotificationView: View {
                         
                         .padding(.vertical, 8)
                         .padding(.horizontal, 12)
-                        .background(Color.white)
+                        .background(Color(.systemGray4))
                         .cornerRadius(5)
+                        .hidden()
 
-                        Button {
-                            let dateComponents = Calendar.current.dateComponents([.hour,.minute], from: date)
-                            guard let hour = dateComponents.hour,
-                                  let minute = dateComponents.minute
-                            else { return }
-
-                            notificationManager.createLocalNotification(title: title, hour: hour, minute: minute) { error in
-                                if error == nil {
-                                    DispatchQueue.main.async {
-                                        self.isPresented = false
-                                    }
-                                }
-                            }
-                        } label: {
-                            Text("Create")
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                        }
-                        .padding()
-                        .background(Color(.systemGray3))
-                        .cornerRadius(5)
-                        .buttonStyle(PlainButtonStyle())
+                        createButton()
                     }
                     .background(.black)
                     .padding(.horizontal, 32)
@@ -71,7 +50,7 @@ struct CreateNotificationView: View {
         }
     }
     
-    var createButton: some View {
+    func createButton() -> some View {
         Button {
             let dateComponents = Calendar.current.dateComponents([.hour,.minute], from: date)
             guard let hour = dateComponents.hour,
@@ -88,8 +67,13 @@ struct CreateNotificationView: View {
         } label: {
             Text("Create")
                 .fontWeight(.semibold)
-                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
         }
+        .padding()
+        .background(Color("buttonBackgroundStart"))
+        .cornerRadius(5)
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -103,3 +87,4 @@ struct CreateNotificationView_Previews: PreviewProvider {
             isPresented: .constant(false))
     }
 }   
+

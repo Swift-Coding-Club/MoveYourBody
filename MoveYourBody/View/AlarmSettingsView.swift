@@ -71,10 +71,13 @@ struct AlarmSettingsView: View {
                 List {
                     ForEach(notificationManager.notifications, id: \.identifier) { notification in
                         HStack {
-                            Text(notification.content.title).fontWeight(.semibold)
+                            Text(timeDisplayText(from: notification))
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
                             Spacer()
-                            Text(timeDisplayText(from: notification)).fontWeight(.bold)
-                        }
+                            Text(notification.content.title)
+                                .hidden()
+                                .fontWeight(.semibold)
                     }
                     .onDelete(perform: delete)
                 }
