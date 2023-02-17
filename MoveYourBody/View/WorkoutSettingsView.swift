@@ -10,32 +10,41 @@ import Foundation
 
 
 struct WorkoutSettingsView: View {
+    //Onboarding Screen을 띄우기 위한 변수
+    @AppStorage("visited") var visited: Bool = DefaultSettings.visited
+    
+    //각 설정 버튼에 대한 클릭 여부 저장, Mainview의 enum DefaultSettings로 여러 뷰에서 변수를 이용할 수 있게 하였음.
     @AppStorage("toggle1") var didTap1: Bool = DefaultSettings.didTap1
-    @AppStorage("toggle2") var didTap2: Bool = false
-    @AppStorage("toggle3") var didTap3: Bool = false
-    @AppStorage("toggle4") var didTap4: Bool = false
-    @AppStorage("toggle5") var didTap5: Bool = false
+    @AppStorage("toggle2") var didTap2: Bool = DefaultSettings.didTap2
+    @AppStorage("toggle3") var didTap3: Bool = DefaultSettings.didTap3
+    @AppStorage("toggle4") var didTap4: Bool = DefaultSettings.didTap4
+    @AppStorage("toggle5") var didTap5: Bool = DefaultSettings.didTap5
     
-    @AppStorage("toggle6") var didTap6: Bool = false
-    @AppStorage("toggle7") var didTap7: Bool = false
+    @AppStorage("toggle6") var didTap6: Bool = DefaultSettings.didTap6
+    @AppStorage("toggle7") var didTap7: Bool = DefaultSettings.didTap7
     
-//  let squat = Foundation.UserDefaults.standard.bool(forKey: "isClicked")
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    //btnBack을 눌렀을 때 메인화면으로 돌아가기 위함.
+    //ios15에서 presentationMode는 deprecated됨
+    @Environment(\.dismiss) private var dismiss
     
+    //정의하였으나 사용법을 모름
+    let gradient2 = LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing)
+    
+    //메인 화면으로 돌아가는 버튼, 네비게이션이 아닌 현재 화면을 지워서 돌아감
     var btnBack: some View{
-        Button(action:{self.presentationMode.wrappedValue.dismiss()}){
+        Button(action:{dismiss()}){
             HStack{
                 Image("go-back")
             }.navigationBarBackButtonHidden(true)
         }
     }
-    var squat = Foundation.UserDefaults.standard.bool(forKey: "isClicked")
-    
+  
+    //네비게이션 타이틀의 경우 색상 지정을 위해 별도의 초기화가 필요해서 작성
     init() {
-           //Use this if NavigationBarTitle is with Large Font
+           // Large Font일 때 사용
            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
-           //Use this if NavigationBarTitle is with displayMode = .inline
+           // displayMode = .inline일 때 사용
            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
        }
     
@@ -47,104 +56,125 @@ struct WorkoutSettingsView: View {
                 VStack (spacing:80){
                     VStack(spacing: 20){
                         Text("하고 싶지 않은 동작이 있나요?")
+                            .font(.system(size: 20))
+                            .fontWeight(.semibold)
                         HStack{
-                            Button(action:{
-                                self.didTap1.toggle()
-                            }){
-                                Text("스쿼트")
-                                    .padding()
-                            }
-                            .background(didTap1 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                           
+                                
+                                Button{
+                                    self.didTap1.toggle()
+                                    
+                                }label:{
+                                    Text("스쿼트")
+                                        .foregroundColor(didTap1 ? .black: .white)
+                                        .padding()
+                                        .overlay(
+                                                    RoundedRectangle(cornerRadius: 20)
+                                                        .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                                )
+                                        
+                                }//그래디언트 버튼 클릭 설정 backgroundColor(didTap1? LinearGradient~: Color("background")) > 타입 불일치 에러 ----> Color("background")를 사용할 때에도 gradient를 적용한 후 gradient에 didTap1 적용 > 다시 background 적용으로 해결
+                                .background(LinearGradient(gradient: didTap1 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(20)
+
+
+                                
                             
                             
                             Button(action:{
                                 self.didTap2.toggle()
                             }){
                                 Text("플랭크")
+                                    .foregroundColor(didTap2 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap2 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                            .background(LinearGradient(gradient: didTap2 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
+
                             
                             Button(action:{
                                 self.didTap3.toggle()
                             }){
                                 Text("런지")
+                                    .foregroundColor(didTap3 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap3 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                            .background(LinearGradient(gradient: didTap3 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
+
+                            
                         }
                         HStack{
                             Button(action:{
                                 self.didTap4.toggle()
                             }){
                                 Text("상체")
+                                    .foregroundColor(didTap4 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap4 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                            .background(LinearGradient(gradient: didTap4 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
                             
                             Button(action:{
                                 self.didTap5.toggle()
                             }){
                                 Text("하체")
+                                    .foregroundColor(didTap5 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap5 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
-                        }
+                            .background(LinearGradient(gradient: didTap5 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)                        }
                     }
                     
-                    VStack{
+                    VStack( spacing: 20){
                         Text("1회 운동 시간은 얼만큼이 좋은가요?")
+                            .font(.system(size: 20))
+                            .fontWeight(.semibold)
+                            
                         HStack{
                             Button(action:{
                                 self.didTap6.toggle()
                             }){
                                 Text("3분 이하")
+                                    .foregroundColor(didTap6 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap6 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                            .background(LinearGradient(gradient: didTap6 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
                             
                             Button(action:{
                                 self.didTap7.toggle()
                             }){
                                 Text("5분 이하")
+                                    .foregroundColor(didTap7 ? .black: .white)
                                     .padding()
+                                    .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
+                                            )
                             }
-                            .background(didTap7 ? Color("background") : Color.green)
-                            .cornerRadius(18)
-                            .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(Color.green, lineWidth: 3)
-                                    )
+                            .background(LinearGradient(gradient: didTap7 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
                         }
                         
                     }
@@ -153,33 +183,14 @@ struct WorkoutSettingsView: View {
                 .navigationTitle("운동 설정")
                 .foregroundColor(Color.white)
                                 .navigationBarItems(leading: btnBack)
+                
                                 
             }
-        }
+        }.navigationBarBackButtonHidden()
         
     }
 }
-    
-
-
-@ViewBuilder
-func saveButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("Save")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .multilineTextAlignment(.center)
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonStyle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-
-
+//별도의 Save 버튼 없이 설정 사항이 저장됨.
 
 struct OutlineButtonStyle: ButtonStyle{
     static let neongreen=Color("neon-green")
@@ -197,22 +208,10 @@ struct OutlineButtonStyle: ButtonStyle{
     }
 }
 
-extension UINavigationBarAppearance {
-    func setColor(title: UIColor? = nil, background: UIColor? = nil) {
-        configureWithTransparentBackground()
-        if let titleColor = title {
-            largeTitleTextAttributes = [.foregroundColor: titleColor]
-            titleTextAttributes = [.foregroundColor: titleColor]
-        }
-        backgroundColor = background
-        UINavigationBar.appearance().scrollEdgeAppearance = self
-        UINavigationBar.appearance().standardAppearance = self
-    }
-}
-
 struct MandoView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutSettingsView()
     }
 }
+
 
