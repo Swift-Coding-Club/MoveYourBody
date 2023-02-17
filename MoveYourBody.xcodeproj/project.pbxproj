@@ -76,7 +76,6 @@
 		6054FC58298246A300059CD3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				60FCEF0B298FED6D002A7619 /* NotificationManager.swift */,
 				604EAB8A2987E773008CFE22 /* WorkoutViewModel.swift */,
 			);
 			path = ViewModel;
@@ -119,6 +118,7 @@
 			children = (
 				B7014C41299A3B3700B912D6 /* ContentView.swift */,
 				609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */,
+				B7543E1F299FA33E0053ECA6 /* Managers */,
 				6054FC59298246D700059CD3 /* Utilities */,
 				6054FC562982469600059CD3 /* Model */,
 				6054FC58298246A300059CD3 /* ViewModel */,
@@ -135,6 +135,14 @@
 				609D4DF02969357F009B2381 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B7543E1F299FA33E0053ECA6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				60FCEF0B298FED6D002A7619 /* NotificationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
