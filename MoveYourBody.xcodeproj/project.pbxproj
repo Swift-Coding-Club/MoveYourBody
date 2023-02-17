@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BE0B8E9299F875E001B6BB3 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE0B8E8299F875E001B6BB3 /* OnBoardingView.swift */; };
 		604EAB8B2987E773008CFE22 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EAB8A2987E773008CFE22 /* WorkoutViewModel.swift */; };
 		6054FC55298245BF00059CD3 /* WorkoutContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6054FC53298245BF00059CD3 /* WorkoutContainer.xcdatamodeld */; };
 		6054FC5D29824AB700059CD3 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6054FC5C29824AB700059CD3 /* WorkoutView.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		4BC8DB37299A2AF3004AF4C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4BE0B8E8299F875E001B6BB3 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		604EAB8A2987E773008CFE22 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		6054FC54298245BF00059CD3 /* WorkoutContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutContainer.xcdatamodel; sourceTree = "<group>"; };
 		6054FC5C29824AB700059CD3 /* WorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				60FCEF09298FED61002A7619 /* CreateNotificationView.swift */,
 				60FCEF05298FED43002A7619 /* AlarmSettingsView.swift */,
 				60A3C45D29700D3500540D21 /* WorkoutSettingsView.swift */,
+				4BE0B8E8299F875E001B6BB3 /* OnBoardingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				609D4DEC2969357E009B2381 /* ContentView.swift in Sources */,
 				604EAB8B2987E773008CFE22 /* WorkoutViewModel.swift in Sources */,
 				609D4DEA2969357E009B2381 /* MoveYourBodyApp.swift in Sources */,
+				4BE0B8E9299F875E001B6BB3 /* OnBoardingView.swift in Sources */,
 				60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */,
 				60FCEF0C298FED6D002A7619 /* NotificationManager.swift in Sources */,
 				6054FC55298245BF00059CD3 /* WorkoutContainer.xcdatamodeld in Sources */,
