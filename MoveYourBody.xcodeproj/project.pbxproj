@@ -12,7 +12,6 @@
 		6054FC5D29824AB700059CD3 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6054FC5C29824AB700059CD3 /* WorkoutView.swift */; };
 		6054FC6029824AEC00059CD3 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6054FC5F29824AEC00059CD3 /* Counter.swift */; };
 		609D4DEA2969357E009B2381 /* MoveYourBodyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */; };
-		609D4DEC2969357E009B2381 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609D4DEB2969357E009B2381 /* ContentView.swift */; };
 		609D4DEE2969357F009B2381 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609D4DED2969357F009B2381 /* Assets.xcassets */; };
 		609D4DF12969357F009B2381 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609D4DF02969357F009B2381 /* Preview Assets.xcassets */; };
 		60A3C45A29700D2600540D21 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3C45929700D2600540D21 /* MainView.swift */; };
@@ -21,6 +20,7 @@
 		60FCEF08298FED5B002A7619 /* InfoOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */; };
 		60FCEF0A298FED61002A7619 /* CreateNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF09298FED61002A7619 /* CreateNotificationView.swift */; };
 		60FCEF0C298FED6D002A7619 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF0B298FED6D002A7619 /* NotificationManager.swift */; };
+		B7014C42299A3B3700B912D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7014C41299A3B3700B912D6 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,6 @@
 		6054FC5F29824AEC00059CD3 /* Counter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		609D4DE62969357E009B2381 /* MoveYourBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveYourBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveYourBodyApp.swift; sourceTree = "<group>"; };
-		609D4DEB2969357E009B2381 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		609D4DED2969357F009B2381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609D4DF02969357F009B2381 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		60A3C45929700D2600540D21 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -39,6 +38,7 @@
 		60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoOverlayView.swift; sourceTree = "<group>"; };
 		60FCEF09298FED61002A7619 /* CreateNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNotificationView.swift; sourceTree = "<group>"; };
 		60FCEF0B298FED6D002A7619 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B7014C41299A3B3700B912D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,6 @@
 		6054FC58298246A300059CD3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				60FCEF0B298FED6D002A7619 /* NotificationManager.swift */,
 				604EAB8A2987E773008CFE22 /* WorkoutViewModel.swift */,
 			);
 			path = ViewModel;
@@ -117,8 +116,9 @@
 		609D4DE82969357E009B2381 /* MoveYourBody */ = {
 			isa = PBXGroup;
 			children = (
+				B7014C41299A3B3700B912D6 /* ContentView.swift */,
 				609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */,
-				609D4DEB2969357E009B2381 /* ContentView.swift */,
+				B7543E1F299FA33E0053ECA6 /* Managers */,
 				6054FC59298246D700059CD3 /* Utilities */,
 				6054FC562982469600059CD3 /* Model */,
 				6054FC58298246A300059CD3 /* ViewModel */,
@@ -135,6 +135,14 @@
 				609D4DF02969357F009B2381 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B7543E1F299FA33E0053ECA6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				60FCEF0B298FED6D002A7619 /* NotificationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,10 +217,10 @@
 			files = (
 				60FCEF08298FED5B002A7619 /* InfoOverlayView.swift in Sources */,
 				6054FC6029824AEC00059CD3 /* Counter.swift in Sources */,
+				B7014C42299A3B3700B912D6 /* ContentView.swift in Sources */,
 				6054FC5D29824AB700059CD3 /* WorkoutView.swift in Sources */,
 				60A3C45E29700D3500540D21 /* WorkoutSettingsView.swift in Sources */,
 				60A3C45A29700D2600540D21 /* MainView.swift in Sources */,
-				609D4DEC2969357E009B2381 /* ContentView.swift in Sources */,
 				604EAB8B2987E773008CFE22 /* WorkoutViewModel.swift in Sources */,
 				609D4DEA2969357E009B2381 /* MoveYourBodyApp.swift in Sources */,
 				60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */,
@@ -275,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -329,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -347,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoveYourBody/Preview Content\"";
-				DEVELOPMENT_TEAM = MV89SHQKF4;
+				DEVELOPMENT_TEAM = BU58T4WTHQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -376,7 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoveYourBody/Preview Content\"";
-				DEVELOPMENT_TEAM = MV89SHQKF4;
+				DEVELOPMENT_TEAM = BU58T4WTHQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

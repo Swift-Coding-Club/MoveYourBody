@@ -19,6 +19,7 @@ struct InfoOverlayView: View {
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
+                .foregroundColor(.white)
             
             Button {
                 action()

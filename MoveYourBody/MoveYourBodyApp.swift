@@ -15,5 +15,6 @@ struct MoveYourBodyApp: App {
               ContentView()
             }
         }
+        
     }
 }
