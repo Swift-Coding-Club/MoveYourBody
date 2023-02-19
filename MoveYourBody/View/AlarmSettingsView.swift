@@ -78,6 +78,8 @@ struct AlarmSettingsView: View {
                             Text(notification.content.title)
                                 .hidden()
                                 .fontWeight(.semibold)
+                        }
+                        
                     }
                     .onDelete(perform: delete)
                 }
@@ -106,9 +108,9 @@ struct AlarmSettingsView: View {
                     isCreatePresented = true
                 } label: {
                     Text("add")
-                        //.imageScale(.large)
+                    //.imageScale(.large)
                         .foregroundColor(.white)
-                        
+                    
                 })
                 .navigationBarBackButtonHidden(true)
                 .sheet(isPresented: $isCreatePresented) {

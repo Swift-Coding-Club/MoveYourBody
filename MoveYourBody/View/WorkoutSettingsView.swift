@@ -195,38 +195,37 @@ struct WorkoutSettingsView: View {
 
     }
 }
-//별도의 Save 버튼 없이 설정 사항이 저장됨.
-=======
-    var body: some View {
-        ZStack{
-            Color("background")
-                .ignoresSafeArea()
-            VStack {
-                ForEach(vm.filteredItems){
-                    item in HStack{
-                        Button(action:{
-                            vm.toggleCheck(item: item)
-                        }){
-                            Text(item.title)
-                                .font(.headline)
-                        }
-                        .foregroundColor(Color.black)
-                        .font(.system(size:14).bold())
-                        .padding(15)
-                        .background(vm.contains(item) ? Color.green: Color.red)
-                        
-                    }
-                }
-            }
-            
-            
-        }.navigationBarTitle("운동설정")
-            .navigationBarItems(leading:
-                                    btnBack, trailing: saveButton())
-        
-        
-        .navigationBarBackButtonHidden(true)}
-}
+////별도의 Save 버튼 없이 설정 사항이 저장됨.
+//    var body: some View {
+//        ZStack{
+//            Color("background")
+//                .ignoresSafeArea()
+//            VStack {
+//                ForEach(vm.filteredItems){
+//                    item in HStack{
+//                        Button(action:{
+//                            vm.toggleCheck(item: item)
+//                        }){
+//                            Text(item.title)
+//                                .font(.headline)
+//                        }
+//                        .foregroundColor(Color.black)
+//                        .font(.system(size:14).bold())
+//                        .padding(15)
+//                        .background(vm.contains(item) ? Color.green: Color.red)
+//                        
+//                    }
+//                }
+//            }
+//            
+//            
+//        }.navigationBarTitle("운동설정")
+//            .navigationBarItems(leading:
+//                                    btnBack, trailing: saveButton())
+//        
+//        
+//        .navigationBarBackButtonHidden(true)}
+//}
 
 @ViewBuilder
 func saveButton() -> some View {
