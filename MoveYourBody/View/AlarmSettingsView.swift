@@ -10,6 +10,7 @@ import SwiftUI
 struct AlarmSettingsView: View {
     @StateObject private var notificationManager = NotificationManager()
     @State private var isCreatePresented = false
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     private static var notificationDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -52,8 +53,6 @@ struct AlarmSettingsView: View {
             EmptyView()
         }
     }
-    //메인뷰로 돌아가는 버튼: navigation link가 아닌 binding을 이용해 이 화면을 없애서 돌아감
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var btnBack: some View{
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
@@ -62,22 +61,28 @@ struct AlarmSettingsView: View {
             }.navigationBarBackButtonHidden(true)
         }
     }
+    
     var body: some View {
         ZStack {
-            Color.yellow
+            Color.black
                 .ignoresSafeArea()
             
             VStack(spacing: 70) {
                 List {
                     ForEach(notificationManager.notifications, id: \.identifier) { notification in
                         HStack {
-                            Text(notification.content.title).fontWeight(.semibold)
+                            Text(timeDisplayText(from: notification))
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
                             Spacer()
-                            Text(timeDisplayText(from: notification)).fontWeight(.bold)
-                        }
+                            Text(notification.content.title)
+                                .hidden()
+                                .fontWeight(.semibold)
                     }
                     .onDelete(perform: delete)
                 }
+                .scrollContentBackground(.hidden)
+                .background(.black)
                 .listStyle(InsetGroupedListStyle())
                 .overlay(infoOverlayView)
                 .navigationTitle("운동 알림")
@@ -96,21 +101,24 @@ struct AlarmSettingsView: View {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                     notificationManager.reloadAuthorizationStatus()
                 }
-                .navigationBarItems(leading:btnBack )
+                .navigationBarItems(leading: btnBack)
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
                 } label: {
-                    Image(systemName: "plus.circle")
-                        .imageScale(.large)
+                    Text("add")
+                        //.imageScale(.large)
+                        .foregroundColor(.white)
+                        
                 })
+                .navigationBarBackButtonHidden(true)
                 .sheet(isPresented: $isCreatePresented) {
                     NavigationView {
                         CreateNotificationView(
                             notificationManager: notificationManager,
                             isPresented: $isCreatePresented)
                     }
-                    .accentColor(.primary)
                 }
+                .padding(.horizontal, 16)
             }
         }
     }

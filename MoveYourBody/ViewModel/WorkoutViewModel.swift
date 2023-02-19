@@ -40,9 +40,7 @@ final class WorkoutViewModel: ObservableObject {
     func delayTime() async {
         while currentIndex < workoutDescriptionTuples.count - 1 {
             try? await Task.sleep(nanoseconds: UInt64(currentWorkoutDescriptionTuple.1 * 1_000_000_000))
-            DispatchQueue.main.async {
-                self.updateWorkoutDescriptions()
-            }
+            updateWorkoutDescriptions()
         }
     }
     
@@ -58,5 +56,4 @@ final class WorkoutViewModel: ObservableObject {
             }
         }
     }
-    
 }
