@@ -7,6 +7,7 @@
 
 import Foundation
 extension WorkoutSettingsView{
+    
     final class ViewModel: ObservableObject{
         @Published var items = [Item]()
         @Published var showingChecked = false //
@@ -18,7 +19,6 @@ extension WorkoutSettingsView{
             self.savedItems = db.load()
             self.items = Item.sampleItems
         }
-        
         
         var filteredItems:[Item]{
             if showingChecked{
@@ -40,8 +40,5 @@ extension WorkoutSettingsView{
             }
             db.save(items: savedItems)
         }
-        
-        
     }
-    
 }
