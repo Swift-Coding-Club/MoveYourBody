@@ -9,8 +9,9 @@ import SwiftUI
 
 
 struct WorkoutSettingsView: View {
+    @AppStorage("firstVisit") var isFirstTimeVisited = true
     //Onboarding Screen을 띄우기 위한 변수
-    @AppStorage("visited") var visited: Bool = WorkoutSettings.isFirstTimeVisited
+    
     //각 설정 버튼에 대한 클릭 여부 저장, Mainview의 enum DefaultSettings로 여러 뷰에서 변수를 이용할 수 있게 하였음.
 
     @AppStorage("toggle1") var didTap1: Bool = WorkoutSettings.didTap1
