@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum WorkoutSettings {
-    static let isFirstTimeVisited = false //첫 방문메만 온 보딩 화면을 띄우기 위한 변수
+//    static let isFirstTimeVisited = false
     static let didTap1 = false
     static let didTap2 = false
     static let didTap3 = false
@@ -19,10 +19,22 @@ enum WorkoutSettings {
 }
 
 struct MainView: View {
-    //만약 버튼 클릭여부를 사용하고 싶다면 주석을 풀고 활용하시면 됩니다. 버튼 !~7번 순서대로 didTap1~didTap7로 클릭여부를 저장했습니다. @AppStorage("toggle1") var didTap1: Bool = DefaultSettings.didTap1
-    var isFirstTimeVisited: Bool = WorkoutSettings.isFirstTimeVisited
+    @AppStorage("firstVisit") var isFirstTimeVisited: Bool = false
+    
+    var currentPage: Int = Walkthrough.currentPage
     var body: some View {
-        
+            ZStack{
+                if isFirstTimeVisited == true {
+                    MainScreen()
+                } else {
+                    OnBoardingView()
+                   
+                }
+        }
+    }
+}
+struct MainScreen: View{
+    var body: some View{
         ZStack {
             
             Color("background")
@@ -47,7 +59,7 @@ struct MainView: View {
                     }
                     
                 }
-                
+            }
                 
             }
         }
@@ -105,7 +117,7 @@ struct MainView: View {
         }
         .navigationBarHidden(true)
         .padding()
-    }}
+    }
 struct SYView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
