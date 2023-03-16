@@ -11,72 +11,125 @@ import AVFoundation
 final class WorkoutViewModel: ObservableObject {
     
     @Published var currentImageName = ""
-    @Published var currentKoreanCount = ""
+    @Published var currentKoreanCount = "준비"
+    @Published var currentCount = 10
     @Published var currentExerciseName = ""
-    @Published var workoutNames = ["코어트레이닝", "롤링", "로잉"]
+    @Published var workoutNames = [String]()
+    @Published var isWorkoutStopped = false
+    @Published var nextExerciseName = ""
+    @Published var isRestTime = false
+    @Published var isWorkoutStarted = false
+    @Published var isWorkoutEnded = false
     
-    private var workoutImageNamesWithCounts: [(String, Int)] = [("figure.core.training", 10), ("figure.rolling", 15), ("figure.rower", 12)] // 운동 이미지 경로 및 해당 운동 횟수 / 시간
     private let speechSynthesizer = AVSpeechSynthesizer()
-    private var currentIndex = 0
-    private var isWorkoutStopped = false
+    private var currentImageIndex = 0
+    private var currentWorkoutIndex = 0
+    
+    private var workouts: [Workout] = [
+        Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"]),
+        Workout(workoutName: "점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"])
+    ]
     
     init() {
-        currentImageName = workoutImageNamesWithCounts[0].0
-        currentExerciseName = workoutNames[0]
+        workouts.shuffle() // 랜덤 운동 나올 수 있도록 섞기
+        /* 추후에는 설정한 운동 성격에 따라 섞일 수 있어야 함 */
+        
+        // publish 값 초기화
+        currentImageName = workouts[0].workoutImageNames[0]
+        currentExerciseName = workouts[0].workoutName
+        
+        // 셔플된 workout 이름들 배열에 넣기
+        for workout in workouts {
+            workoutNames.append(workout.workoutName)
+        }
+        
+        // tts 위한 AVAudioSession 초기화
         do{
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         }
         catch
-        { print("Fail to enable session") }
+        {
+            print("Fail to enable session")
+        }
     }
     
-    /// 운동 뷰 시작
-    func startWorkout() {
+    // 운동 준비하기
+    func prepareWorkout() {
+        // 5초 준비 화면 보여준 후 운동 시작하기
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+            self.isWorkoutStarted = true
+        }
+    }
+    
+    // 한 운동마다 불리는 일회성 메서드
+    func startExercise() {
         var count = 1
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
-            // 뷰 전환 시 타이머 멈추기
+        
+        // 1.5초마다 이미지 바꾸기
+        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
             if self.isWorkoutStopped {
                 timer.invalidate()
-                self.currentIndex = 0
-                self.isWorkoutStopped = false
-            } else {    // 운동 중일때만 숫자 세기
-                // 3초마다 speakCount로 숫자 세어주기
-                self.speakCount(count)
-                count += 1
+                self.currentImageIndex = 0
             }
             
-            // 설정된 횟수에 도달하면 다음 index로 넘어가기
-            if count == self.workoutImageNamesWithCounts[self.currentIndex].1 + 1 {
-                count = 1
-                self.currentIndex += 1
-                // 마지막 index까지 모두 마무리하면 timer 종료 및 변수 초기화
-                if self.currentIndex == self.workoutImageNamesWithCounts.count {
+            let workoutImagesCount = self.workouts[self.currentWorkoutIndex].workoutImageNames.count
+            self.currentImageIndex += 1
+            self.currentImageName = self.workouts[self.currentWorkoutIndex].workoutImageNames[self.currentImageIndex % workoutImagesCount]
+        }
+        
+        // 3초마다 숫자 세기
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+            if self.isWorkoutStopped {
+                timer.invalidate()
+                self.currentWorkoutIndex = 0
+                self.isWorkoutStopped = false
+            }
+            
+            self.speakCount(count)
+            count += 1
+           
+            // 설정 횟수 모두 도달하게 되면 Rest 하고 다음 인덱스로 넘어가기
+            if count == self.workouts[self.currentWorkoutIndex].exerciseCountInSet + 1 {
+                // 만약 마지막 운동이었다면 WorkoutSummary뷰 불러올 수 있도록 flag 변수 설정
+                if self.currentWorkoutIndex + 1 == self.workouts.count {
                     timer.invalidate()
-                    self.currentIndex = 0
-                    self.isWorkoutStopped = false
+                    self.isWorkoutStarted = false
+                    self.isWorkoutEnded = true
+                // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
                 } else {
-                    // 마지막이 아니면 이미지 및 운동 이름 바꾸기
-                    self.currentImageName = self.workoutImageNamesWithCounts[self.currentIndex].0
-                    self.currentExerciseName = self.workoutNames[self.currentIndex]
+                    timer.invalidate()
+                    self.currentKoreanCount = "준비"
+                    self.isRestTime = true
                 }
             }
         }
     }
+   
+    // 쉬는 시간 시작
+    func startRest() {
+        // 다음 운동 이름 설정
+        currentWorkoutIndex += 1
+        nextExerciseName = workoutNames[currentWorkoutIndex]
+        currentExerciseName = nextExerciseName
+       
+        // 쉬는 시간 10초 세기
+        currentCount = 10
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if self.currentCount == 0 {
+                timer.invalidate()
+                self.isRestTime = false
+            }
+            self.currentCount -= 1
+        }
+    }
     
-    /// 운동 뷰 사라짐
+    // 운동 멈추기
     func stopWorkout() {
         isWorkoutStopped = true
         speechSynthesizer.pauseSpeaking(at: .immediate)  // speaking 중지
-    }
-    
-    func prepareWorkout() {
-        let utterance1 = AVSpeechUtterance(string: workoutNames[0])
-        let utterance2 = AVSpeechUtterance(string: workoutNames[1])
-        let utterance3 = AVSpeechUtterance(string: workoutNames[2])
-        speechSynthesizer.speak(utterance1)
-        speechSynthesizer.speak(utterance2)
-        speechSynthesizer.speak(utterance3)
     }
     
     /// count로 들어오는 숫자 이름을 디바이스 스피커로 출력
