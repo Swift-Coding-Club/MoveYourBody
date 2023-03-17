@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-enum WorkoutSettings {
-//    static let isFirstTimeVisited = false
-    static let didTap1 = false
-    static let didTap2 = false
-    static let didTap3 = false
-    static let didTap4 = false
-    static let didTap5 = false
-    static let didTap6 = false
-    static let didTap7 = false
-}
-
 struct MainView: View {
     @AppStorage("firstVisit") var isFirstTimeVisited: Bool = false
     
@@ -109,7 +98,7 @@ struct MainScreen: View{
     
     @ViewBuilder
     func acheivementsButton() -> some View {
-        NavigationLink(destination: WorkoutSettingsView()) {
+        NavigationLink(destination: WorkoutSettingsView()){
             
             Image(systemName: "figure.run")
                 .font(.system(size: 44, weight: .regular))

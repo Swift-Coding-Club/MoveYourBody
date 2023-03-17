@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import SwiftUI
 
 final class WorkoutViewModel: ObservableObject {
     
@@ -27,14 +28,55 @@ final class WorkoutViewModel: ObservableObject {
     
     private var workouts: [Workout] = [
         Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"]),
+                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody),
         Workout(workoutName: "점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"])
+                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"], bodyPart: .lowerBody),
+        Workout(workoutName: "바스켓볼", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["basketBall_1", "basketBall_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "굿모닝", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["goodmorning_1", "goodmorning_2"], bodyPart: .upperBody),
+        Workout(workoutName: "하이 니", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["highKnee_1", "highKnee_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["lunge_1", "lunge_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "사이드 런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["sideLunge_base", "sideLunge_left", "sideLunge_base", "sideLunge_right"], bodyPart: .lowerBody),
+        Workout(workoutName: "스케이터 토 터치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["skaterToeTouch_1", "skaterToeTouch_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "스쿼트", workoutSets: 2, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["squat_1", "squat_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "스탠딩 크런치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["standingCrunch_basic", "standingCrunch_left", "standingCrunch_basic", "standingCrunch_right"], bodyPart: .lowerBody)
     ]
     
     init() {
+        
+        workouts = workouts.filter({ workout in
+            // 상체운동 하고싶다면
+            if !WorkoutSettingsManager.shared.didTap4 {
+                // 상체운동 파트면 true
+                if workout.bodyPart == .upperBody {
+                    return true
+                }
+            }
+            
+            // 하체운동 하고싶다면
+            if !WorkoutSettingsManager.shared.didTap5 {
+                // 하체운동 파트면 true
+                if workout.bodyPart == .lowerBody {
+                    return true
+                }
+            }
+            
+            // 둘 다 아니면 return false
+            return false
+        })
+        
+        print("noUpperBody : \(WorkoutSettingsManager.shared.didTap4)")
+        print("noLowerBody : \(WorkoutSettingsManager.shared.didTap5)")
+        print(workouts)
+        
         workouts.shuffle() // 랜덤 운동 나올 수 있도록 섞기
-        /* 추후에는 설정한 운동 성격에 따라 섞일 수 있어야 함 */
         
         // publish 값 초기화
         currentImageName = workouts[0].workoutImageNames[0]

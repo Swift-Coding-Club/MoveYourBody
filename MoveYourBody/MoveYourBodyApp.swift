@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct MoveYourBodyApp: App {
+   
     var body: some Scene {
         WindowGroup {
             NavigationView {
               MainView()
             }
         }
-        
     }
 }
