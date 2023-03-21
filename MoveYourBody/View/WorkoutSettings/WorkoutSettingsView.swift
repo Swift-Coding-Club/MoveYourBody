@@ -50,7 +50,7 @@ struct WorkoutSettingsView: View {
                         Text("하고 싶지 않은 동작이 있나요?")
                             .font(.system(size: 20))
                             .fontWeight(.semibold)
-                        HStack{
+                        /*HStack{
                             Button{
                                 settings.didTap1.toggle()
                             }label:{
@@ -92,7 +92,7 @@ struct WorkoutSettingsView: View {
                             }
                             .background(LinearGradient(gradient: settings.didTap3 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(20)
-                        }
+                        }*/
                         HStack{
                             Button(action:{
                                 settings.didTap4.toggle()
@@ -130,15 +130,18 @@ struct WorkoutSettingsView: View {
                     }
                     
                     VStack( spacing: 20){
-                        Text("1회 운동 시간은 얼만큼이 좋은가요?")
+                        Text("1회 운동 시간을 정하세요.")
                             .font(.system(size: 20))
                             .fontWeight(.semibold)
                         
                         HStack{
                             Button(action:{
                                 settings.didTap6.toggle()
+                                if settings.didTap6 == true && settings.didTap7 == true {
+                                    settings.didTap7.toggle()
+                                }
                             }){
-                                Text("3분 이하")
+                                Text("5분")
                                     .foregroundColor(settings.didTap6 ? .black: .white)
                                     .padding()
                                     .overlay(
@@ -151,8 +154,11 @@ struct WorkoutSettingsView: View {
                             
                             Button(action:{
                                 settings.didTap7.toggle()
+                                if settings.didTap6 == true && settings.didTap7 == true {
+                                    settings.didTap6.toggle()
+                                }
                             }){
-                                Text("5분 이하")
+                                Text("7분")
                                     .foregroundColor(settings.didTap7 ? .black: .white)
                                     .padding()
                                     .overlay(
