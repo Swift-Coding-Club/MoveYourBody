@@ -8,51 +8,56 @@
 import SwiftUI
 
 struct ExerciseView: View {
-    @Binding var currentKoreanCount: String
-    let exerciseName: String
-    let imageName: String
+    
+    @ObservedObject var workoutViewModel: WorkoutViewModel
     
     var body: some View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
             VStack(spacing: 50) {
+                Spacer()
                 showExerciseName()
+                Spacer()
                 showExerciseImage()
+                Spacer()
                 showCounts()
                     .frame(height: 50)
+                Spacer()
             }
         }
     }
     
     @ViewBuilder
     func showExerciseName() -> some View {
-        Text(exerciseName)
+        Text(workoutViewModel.currentExerciseName)
             .font(.system(size: 50, weight: .bold))
+            .multilineTextAlignment(.leading)
+            .fixedSize(horizontal: false, vertical: true)
             .foregroundColor(.white)
+            .padding(.horizontal)
     }
     
     @ViewBuilder
     func showExerciseImage() -> some View {
-        ZStack {
-            if let imageName = imageName {
-                Image(imageName)
-                    .resizable()
-                    .frame(width: 300, height: 300)
-            }
-        }
+        Image(workoutViewModel.currentImageName)
+            .resizable()
+            .frame(width: 300, height: 300)
     }
     
     @ViewBuilder
     func showCounts() -> some View {
-        Text(currentKoreanCount)
+        Text("\(45 - workoutViewModel.currentCount)")
             .font(.system(size: 50, weight: .semibold))
             .foregroundColor(.white)
+            .overlay(
+                CircularProgressBar(currentCount: $workoutViewModel.currentCount)
+            )
     }
 }
 
 struct ExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseView(currentKoreanCount: .constant("하나"), exerciseName: "바스켓볼", imageName: "basketBall_1")
+        ExerciseView(workoutViewModel: WorkoutViewModel())
     }
 }

@@ -7,19 +7,14 @@
 
 import SwiftUI
 
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        .asymmetric(insertion: .move(edge:.trailing).combined(with: .opacity), removal: .scale.combined(with: .opacity))
-    }
-}
-
 struct WorkoutView: View {
     
-    @StateObject private var workoutViewModel = WorkoutViewModel()
+    @StateObject var workoutViewModel = WorkoutViewModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isViewTapped = false
     
     // 뒤로가기 버튼
-    var btnBack: some View{
+    var btnBack: some View {
         Button(action:{
             workoutViewModel.stopWorkout()
             self.presentationMode.wrappedValue.dismiss()}
@@ -36,38 +31,58 @@ struct WorkoutView: View {
             Color.black
                 .ignoresSafeArea()
             
-            // 운동 중일 때
-            if workoutViewModel.isWorkoutStarted {
-                // 쉬는 시간이 아니면 운동 뷰 보이기
-                if !workoutViewModel.isRestTime {
-                    ExerciseView(currentKoreanCount: $workoutViewModel.currentKoreanCount, exerciseName: workoutViewModel.currentExerciseName, imageName: workoutViewModel.currentImageName)
-                        .task {
-                            workoutViewModel.startExercise()
-                        }
-                    // 쉬는 시간이면 쉬는 시간 뷰 보이기
-                } else {
-                    RestTimeView(nextExercise: workoutViewModel.nextExerciseName, leftSeconds: $workoutViewModel.currentCount)
-                        .task {
-                            workoutViewModel.startRest()
-                        }
-                }
-            // 운동 중이 아닐 때
+            // 운동 중이면
+            if workoutViewModel.isExercising {
+                // 운동 뷰
+                ExerciseView(workoutViewModel: workoutViewModel)
+                    .task {
+                        workoutViewModel.startExercise()
+                    }
             } else {
-                // 운동이 끝난게 아니라면 준비중 화면
-                if !workoutViewModel.isWorkoutEnded {
-                    PrepareWorkoutView(names: workoutViewModel.workoutNames)
+                // 준비 중이면
+                if workoutViewModel.isPreparingTime {
+                    PrepareExerciseView(currentCount: $workoutViewModel.currentCount, nextExercise: $workoutViewModel.nextExerciseName)
                         .task {
-                            workoutViewModel.prepareWorkout()
+                            workoutViewModel.startPrepare()
                         }
-                    // 운동이 끝났다면 결과화면
                 } else {
                     WorkoutSummaryView()
                 }
             }
+            
+            if isViewTapped {
+                VStack {
+                    HStack {
+                        backButton()
+                            .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                            .ignoresSafeArea()
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
+        }
+        .statusBarHidden(true)
+        .onTapGesture {
+            self.isViewTapped.toggle()
         }
         
-        .navigationBarItems(leading: btnBack)
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarItems(leading: btnBack)
+//        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+    
+    
+    @ViewBuilder
+    func backButton() -> some View {
+        Button(action:{
+            workoutViewModel.stopWorkout()
+            self.presentationMode.wrappedValue.dismiss()}
+        ){
+            HStack{
+                Image("go-back")
+            }
+        }
     }
 }
 

@@ -16,7 +16,7 @@ struct WorkoutSummaryView: View {
                 .ignoresSafeArea()
             VStack(spacing: 10) {
                 Spacer()
-                Text("오운완!")
+                Text("끝!")
                     .font(.system(size: 80, weight: .heavy))
                 Spacer()
                 endButton()
