@@ -17,16 +17,19 @@ final class WorkoutSettingsManager: ObservableObject {
             objectWillChange.send()
         }
     }
+    
     @AppStorage("selectLower") var selectLowerBody: Bool = false {
         didSet {
             objectWillChange.send()
         }
     }
+    
     @AppStorage("fiveMinutes") var selectFiveMinutes: Bool = false {
         didSet {
             objectWillChange.send()
         }
     }
+    
     @AppStorage("sevenMinutes") var selectSevenMinutes: Bool = false {
         didSet {
             objectWillChange.send()

@@ -19,6 +19,7 @@ final class WorkoutViewModel: ObservableObject {
     @Published var isExercising = false
     @Published var isPreparingTime = true
     @Published var isWorkoutStopped = false
+    @Published var isWorkoutPaused = false
     
     private var currentImageIndex = 0
     private var currentWorkoutIndex = 0
@@ -112,46 +113,50 @@ final class WorkoutViewModel: ObservableObject {
         
         // 1.5초마다 이미지 바꾸기
         Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
-            if self.isWorkoutStopped {
-                timer.invalidate()
-                self.currentImageIndex = 0
-                self.stopWorkout()
+            if !self.isWorkoutPaused {
+                if self.isWorkoutStopped {
+                    timer.invalidate()
+                    self.currentImageIndex = 0
+                    self.stopWorkout()
+                }
+                
+                if self.isPreparingTime {
+                    timer.invalidate()
+                }
+                
+                let workoutImagesCount = self.workouts[self.currentWorkoutIndex].workoutImageNames.count
+                self.currentImageIndex += 1
+                self.currentImageName = self.workouts[self.currentWorkoutIndex].workoutImageNames[self.currentImageIndex % workoutImagesCount]
             }
-            
-            if self.isPreparingTime {
-                timer.invalidate()
-            }
-            
-            let workoutImagesCount = self.workouts[self.currentWorkoutIndex].workoutImageNames.count
-            self.currentImageIndex += 1
-            self.currentImageName = self.workouts[self.currentWorkoutIndex].workoutImageNames[self.currentImageIndex % workoutImagesCount]
         }
         
         // 1초마다 숫자 세기
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.isWorkoutStopped {
-                timer.invalidate()
-                self.currentWorkoutIndex = 0
-                self.stopWorkout()
-            }
-            
-            self.currentCount += 1
-           
-            // 설정 횟수 모두 도달하게 되면 Rest 하고 다음 인덱스로 넘어가기
-            if self.currentCount == 45 {
-                // 만약 마지막 운동이었다면 WorkoutSummary뷰 불러올 수 있도록 flag 변수 설정
-                if self.currentWorkoutIndex + 1 == self.workouts.count {
+            if !self.isWorkoutPaused {
+                if self.isWorkoutStopped {
                     timer.invalidate()
-                    self.currentCount = 0
-                    self.isExercising = false
-                    self.isPreparingTime = false
-                    self.isWorkoutStopped = true
-                // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
-                } else {
-                    timer.invalidate()
-                    self.currentCount = 0
-                    self.isExercising = false
-                    self.isPreparingTime = true
+                    self.currentWorkoutIndex = 0
+                    self.stopWorkout()
+                }
+                
+                self.currentCount += 1
+                
+                // 설정 횟수 모두 도달하게 되면 Rest 하고 다음 인덱스로 넘어가기
+                if self.currentCount == 45 {
+                    // 만약 마지막 운동이었다면 WorkoutSummary뷰 불러올 수 있도록 flag 변수 설정
+                    if self.currentWorkoutIndex + 1 == self.workouts.count {
+                        timer.invalidate()
+                        self.currentCount = 0
+                        self.isExercising = false
+                        self.isPreparingTime = false
+                        self.isWorkoutStopped = true
+                        // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
+                    } else {
+                        timer.invalidate()
+                        self.currentCount = 0
+                        self.isExercising = false
+                        self.isPreparingTime = true
+                    }
                 }
             }
         }
@@ -167,19 +172,21 @@ final class WorkoutViewModel: ObservableObject {
         // 쉬는 시간 15초 세기
         currentCount = 15
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.isWorkoutStopped {
-                self.stopWorkout()
-                timer.invalidate()
+            if !self.isWorkoutPaused{
+                if self.isWorkoutStopped {
+                    self.stopWorkout()
+                    timer.invalidate()
+                }
+                
+                if self.currentCount == 0 {
+                    self.isPreparingTime = false
+                    self.isExercising = true
+                    self.currentCount = 0
+                    timer.invalidate()
+                }
+                
+                self.currentCount -= 1
             }
-            
-            if self.currentCount == 0 {
-                self.isPreparingTime = false
-                self.isExercising = true
-                self.currentCount = 0
-                timer.invalidate()
-            }
-            
-            self.currentCount -= 1
         }
     }
     
@@ -189,5 +196,4 @@ final class WorkoutViewModel: ObservableObject {
         isPreparingTime = false
         isExercising = false
     }
-    
 }

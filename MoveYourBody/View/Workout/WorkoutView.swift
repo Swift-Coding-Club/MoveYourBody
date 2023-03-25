@@ -13,18 +13,6 @@ struct WorkoutView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var isViewTapped = false
     
-    // 뒤로가기 버튼
-    var btnBack: some View {
-        Button(action:{
-            workoutViewModel.stopWorkout()
-            self.presentationMode.wrappedValue.dismiss()}
-        ){
-            HStack{
-                Image("go-back")
-            }
-        }
-    }
-    
     // MARK: - body
     var body: some View {
         ZStack {
@@ -41,18 +29,22 @@ struct WorkoutView: View {
             } else {
                 // 준비 중이면
                 if workoutViewModel.isPreparingTime {
+                    // 운동 준비 뷰
                     PrepareExerciseView(currentCount: $workoutViewModel.currentCount, nextExercise: $workoutViewModel.nextExerciseName)
                         .task {
                             workoutViewModel.startPrepare()
                         }
                 } else {
+                    // 둘 다 아니면 결과 뷰
                     WorkoutSummaryView()
                 }
             }
             
+            // 운동 중 아무곳이나 탭하면
             if isViewTapped {
                 VStack {
                     HStack {
+                        // 뒤로가기 버튼 보이기
                         backButton()
                             .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                             .ignoresSafeArea()
@@ -60,15 +52,15 @@ struct WorkoutView: View {
                     }
                     Spacer()
                 }
+                
             }
         }
         .statusBarHidden(true)
         .onTapGesture {
             self.isViewTapped.toggle()
+            self.workoutViewModel.isWorkoutPaused.toggle()
         }
         
-//        .navigationBarItems(leading: btnBack)
-//        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
     
