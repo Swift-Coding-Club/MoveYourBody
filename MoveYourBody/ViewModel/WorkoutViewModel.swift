@@ -20,9 +20,7 @@ final class WorkoutViewModel: ObservableObject {
     @Published var isPreparingTime = true
     @Published var isWorkoutStopped = false
     @Published var isWorkoutPaused = false
-    
-    private var currentImageIndex = 0
-    private var currentWorkoutIndex = 0
+    @Published var selectedWorkouts: [Workout] = []
     
     private var workouts: [Workout] = [
         Workout(workoutName: "얼터네이팅 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
@@ -67,6 +65,10 @@ final class WorkoutViewModel: ObservableObject {
         Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
                     ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody),
     ]
+    
+    private var currentImageIndex = 0
+    private var currentWorkoutIndex = -1
+    
     private var workoutSettingsManager = WorkoutSettingsManager.shared
     
     init() {
@@ -100,7 +102,11 @@ final class WorkoutViewModel: ObservableObject {
             workouts.removeSubrange(7...(workouts.count-1))
         }
         
-        debugPrint(workouts)
+        workouts.forEach { workout in
+            selectedWorkouts.append(workout)
+        }
+        
+        print(selectedWorkouts)
         
         // publish 값 초기화
         currentImageName = workouts[0].workoutImageNames[0]

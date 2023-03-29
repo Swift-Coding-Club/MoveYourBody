@@ -12,7 +12,8 @@ enum BodyParts {
     case lowerBody
 }
 
-struct Workout {
+struct Workout: Identifiable, Hashable {
+    var id = UUID().uuidString
     let workoutName: String // 운동 이름
     let workoutSets: Int // 몇 세트 운동할지 정하기
     let exerciseCountInSet: Int // 한 세트당 몇 번 운동할지 정하기

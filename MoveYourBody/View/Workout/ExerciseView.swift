@@ -13,8 +13,6 @@ struct ExerciseView: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
             VStack(spacing: 50) {
                 Spacer()
                 showExerciseName()

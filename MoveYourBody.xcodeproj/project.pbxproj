@@ -23,6 +23,10 @@
 		609D4DF12969357F009B2381 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609D4DF02969357F009B2381 /* Preview Assets.xcassets */; };
 		60A3C45A29700D2600540D21 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3C45929700D2600540D21 /* MainView.swift */; };
 		60A3C45E29700D3500540D21 /* WorkoutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3C45D29700D3500540D21 /* WorkoutSettingsView.swift */; };
+		60B7BC3429CF33A6008E6A41 /* ExerciseListModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */; };
+		60B7BC3629CF51F8008E6A41 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B7BC3529CF51F8008E6A41 /* CustomTableViewCell.swift */; };
+		60C48A7129D0606200C911B1 /* CustomBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C48A7029D0606200C911B1 /* CustomBottomSheet.swift */; };
+		60C48A7329D061FA00C911B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C48A7229D061FA00C911B1 /* Constants.swift */; };
 		60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF05298FED43002A7619 /* AlarmSettingsView.swift */; };
 		60FCEF08298FED5B002A7619 /* InfoOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */; };
 		60FCEF0A298FED61002A7619 /* CreateNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF09298FED61002A7619 /* CreateNotificationView.swift */; };
@@ -47,6 +51,10 @@
 		609D4DF02969357F009B2381 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		60A3C45929700D2600540D21 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		60A3C45D29700D3500540D21 /* WorkoutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSettingsView.swift; sourceTree = "<group>"; };
+		60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListModalView.swift; sourceTree = "<group>"; };
+		60B7BC3529CF51F8008E6A41 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		60C48A7029D0606200C911B1 /* CustomBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomSheet.swift; sourceTree = "<group>"; };
+		60C48A7229D061FA00C911B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		60FCEF05298FED43002A7619 /* AlarmSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingsView.swift; sourceTree = "<group>"; };
 		60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoOverlayView.swift; sourceTree = "<group>"; };
 		60FCEF09298FED61002A7619 /* CreateNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNotificationView.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 				602E8D9929BB02BD00D494DC /* ExerciseView.swift */,
 				602E8D9D29BCCF5300D494DC /* WorkoutSummaryView.swift */,
 				606D825229CC7EA700AD4B95 /* PrepareExerciseView.swift */,
+				60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -110,6 +119,7 @@
 			children = (
 				6054FC53298245BF00059CD3 /* WorkoutContainer.xcdatamodeld */,
 				60879F0D29CD54A700FA6479 /* View+Extensions.swift */,
+				60C48A7229D061FA00C911B1 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -118,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				606D825529CC856400AD4B95 /* CircularProgressBar.swift */,
+				60B7BC3529CF51F8008E6A41 /* CustomTableViewCell.swift */,
+				60C48A7029D0606200C911B1 /* CustomBottomSheet.swift */,
 			);
 			path = Componenet;
 			sourceTree = "<group>";
@@ -266,16 +278,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				602E8D9A29BB02BD00D494DC /* ExerciseView.swift in Sources */,
+				60C48A7329D061FA00C911B1 /* Constants.swift in Sources */,
 				60FCEF08298FED5B002A7619 /* InfoOverlayView.swift in Sources */,
 				6054FC5D29824AB700059CD3 /* WorkoutView.swift in Sources */,
 				60A3C45E29700D3500540D21 /* WorkoutSettingsView.swift in Sources */,
 				602E8D9329B8356200D494DC /* WorkoutModel.swift in Sources */,
 				60A3C45A29700D2600540D21 /* MainView.swift in Sources */,
+				60B7BC3629CF51F8008E6A41 /* CustomTableViewCell.swift in Sources */,
 				602E8D9E29BCCF5300D494DC /* WorkoutSummaryView.swift in Sources */,
 				604EAB8B2987E773008CFE22 /* WorkoutViewModel.swift in Sources */,
+				60B7BC3429CF33A6008E6A41 /* ExerciseListModalView.swift in Sources */,
 				609D4DEA2969357E009B2381 /* MoveYourBodyApp.swift in Sources */,
 				4BE0B8E9299F875E001B6BB3 /* OnBoardingView.swift in Sources */,
 				60879F0E29CD54A700FA6479 /* View+Extensions.swift in Sources */,
+				60C48A7129D0606200C911B1 /* CustomBottomSheet.swift in Sources */,
 				60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */,
 				60FCEF0C298FED6D002A7619 /* NotificationManager.swift in Sources */,
 				606D825629CC856400AD4B95 /* CircularProgressBar.swift in Sources */,

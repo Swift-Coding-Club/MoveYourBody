@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+extension Animation {
+    static func spring() -> Animation {
+        Animation.spring(dampingFraction: 0.8)
+            .speed(2)
+    }
+}
+
 struct WorkoutView: View {
     
     @StateObject var workoutViewModel = WorkoutViewModel()
@@ -15,55 +22,62 @@ struct WorkoutView: View {
     
     // MARK: - body
     var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            // 운동 중이면
-            if workoutViewModel.isExercising {
-                // 운동 뷰
-                ExerciseView(workoutViewModel: workoutViewModel)
-                    .task {
-                        workoutViewModel.startExercise()
-                    }
-            } else {
-                // 준비 중이면
-                if workoutViewModel.isPreparingTime {
-                    // 운동 준비 뷰
-                    PrepareExerciseView(currentCount: $workoutViewModel.currentCount, nextExercise: $workoutViewModel.nextExerciseName)
+        GeometryReader { geometry in
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
+                
+                // 운동 중이면
+                if workoutViewModel.isExercising {
+                    // 운동 뷰
+                    ExerciseView(workoutViewModel: workoutViewModel)
                         .task {
-                            workoutViewModel.startPrepare()
+                            workoutViewModel.startExercise()
                         }
                 } else {
-                    // 둘 다 아니면 결과 뷰
-                    WorkoutSummaryView()
-                }
-            }
-            
-            // 운동 중 아무곳이나 탭하면
-            if isViewTapped {
-                VStack {
-                    HStack {
-                        // 뒤로가기 버튼 보이기
-                        backButton()
-                            .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
-                            .ignoresSafeArea()
-                        Spacer()
+                    // 준비 중이면
+                    if workoutViewModel.isPreparingTime {
+                        // 운동 준비 뷰
+                        PrepareExerciseView(currentCount: $workoutViewModel.currentCount, nextExercise: $workoutViewModel.nextExerciseName)
+                            .task {
+                                workoutViewModel.startPrepare()
+                            }
+                    } else {
+                        // 둘 다 아니면 결과 뷰
+                        WorkoutSummaryView()
                     }
-                    Spacer()
                 }
                 
+                // 운동 중 아무곳이나 탭하면
+                if isViewTapped {
+                    VStack {
+                        HStack {
+                            // 뒤로가기 버튼 보이기
+                            backButton()
+                                .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                                .ignoresSafeArea()
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                    
+                    CustomBottomSheet {
+                        ExerciseListModalView(workouts: $workoutViewModel.selectedWorkouts)
+                    }
+                    .transition(.moveFromBottom)
+                    .zIndex(1)
+                }
             }
         }
         .statusBarHidden(true)
         .onTapGesture {
-            self.isViewTapped.toggle()
+            withAnimation(.spring()) {
+                self.isViewTapped.toggle()
+            }
             self.workoutViewModel.isWorkoutPaused.toggle()
         }
-        
         .navigationBarHidden(true)
     }
-    
     
     @ViewBuilder
     func backButton() -> some View {
