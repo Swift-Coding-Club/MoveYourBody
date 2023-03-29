@@ -137,9 +137,7 @@ struct WorkoutSettingsView: View {
                         HStack{
                             Button(action:{
                                 settings.didTap6.toggle()
-                                if settings.didTap6 == true && settings.didTap7 == true {
-                                    settings.didTap7.toggle()
-                                }
+                                settings.didTap7.toggle()
                             }){
                                 Text("5분")
                                     .foregroundColor(settings.didTap6 ? .black: .white)
@@ -153,10 +151,8 @@ struct WorkoutSettingsView: View {
                             .cornerRadius(20)
                             
                             Button(action:{
+                                settings.didTap6.toggle()
                                 settings.didTap7.toggle()
-                                if settings.didTap6 == true && settings.didTap7 == true {
-                                    settings.didTap6.toggle()
-                                }
                             }){
                                 Text("7분")
                                     .foregroundColor(settings.didTap7 ? .black: .white)
