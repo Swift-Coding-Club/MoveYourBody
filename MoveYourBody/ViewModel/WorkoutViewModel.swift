@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
-final class WorkoutViewModel: ObservableObject {
+final class WorkoutViewModel: NSObject, ObservableObject {
     
     @Published var currentImageName = ""
     @Published var currentCount = 0
@@ -20,6 +20,7 @@ final class WorkoutViewModel: ObservableObject {
     @Published var isPreparingTime = true
     @Published var isWorkoutStopped = false
     @Published var isWorkoutPaused = false
+    @Published var isAudioPlayingFinished = false
     @Published var selectedWorkouts: [Workout] = []
     
     private var workouts: [Workout] = [
@@ -70,8 +71,10 @@ final class WorkoutViewModel: ObservableObject {
     private var currentWorkoutIndex = -1
     
     private var workoutSettingsManager = WorkoutSettingsManager.shared
+    private var audioPlayer: AVAudioPlayer!
     
-    init() {
+    override init() {
+        super.init()
         workouts = workouts.filter({ workout in
             // 상체운동 하고싶다면
             if !workoutSettingsManager.selectUpperBody {
@@ -167,14 +170,14 @@ final class WorkoutViewModel: ObservableObject {
             }
         }
     }
-   
+    
     // 다음 운동 준비 시작
     func startPrepare() {
         // 다음 운동 이름 설정
         currentWorkoutIndex += 1
         nextExerciseName = workouts[self.currentWorkoutIndex].workoutName
         currentExerciseName = nextExerciseName
-       
+        startDescriptionAudioPlay()
         // 쉬는 시간 15초 세기
         currentCount = 15
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -196,10 +199,60 @@ final class WorkoutViewModel: ObservableObject {
         }
     }
     
+    // 운동 설명 오디오 재생하기
+    func startDescriptionAudioPlay() {
+        let audioData: Data
+        if NSDataAsset(name: currentExerciseName)?.data == nil {
+            audioData = NSDataAsset(name: "굿모닝")!.data
+        } else {
+            audioData = NSDataAsset(name: currentExerciseName)!.data
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(data: audioData)
+            audioPlayer.delegate = self
+            isAudioPlayingFinished = false
+            audioPlayer.play()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    // 운동 설명 오디오 일시 정지
+    func pauseExerciseDescriptionAudio() {
+        guard let audioPlayer = audioPlayer else {
+            print("audioPlayer 없음")
+            return
+        }
+        audioPlayer.pause()
+    }
+    
+    // 운동 설명 오디오 재생
+    func resumeExerciseDescriptionAudio() {
+        guard let audioPlayer = audioPlayer else {
+            print("AudioPlayer 없음")
+            return
+        }
+        audioPlayer.play()
+    }
+    
     // 운동 멈추기
     func stopWorkout() {
         isWorkoutStopped = true
         isPreparingTime = false
         isExercising = false
+        guard let audioPlayer = audioPlayer else {
+            return
+        }
+        audioPlayer.stop()
     }
+}
+
+extension WorkoutViewModel: AVAudioPlayerDelegate {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        isAudioPlayingFinished = true
+//        audioPlayer = nil
+    }
+    
 }

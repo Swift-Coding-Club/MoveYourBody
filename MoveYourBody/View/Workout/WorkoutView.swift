@@ -75,6 +75,14 @@ struct WorkoutView: View {
                 self.isViewTapped.toggle()
             }
             self.workoutViewModel.isWorkoutPaused.toggle()
+            
+            if self.workoutViewModel.isPreparingTime && !self.workoutViewModel.isAudioPlayingFinished {
+                if self.workoutViewModel.isWorkoutPaused {
+                    self.workoutViewModel.pauseExerciseDescriptionAudio()
+                } else {
+                    self.workoutViewModel.resumeExerciseDescriptionAudio()
+                }
+            }
         }
         .navigationBarHidden(true)
     }
