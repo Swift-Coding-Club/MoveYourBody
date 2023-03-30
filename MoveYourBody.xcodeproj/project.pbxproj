@@ -27,6 +27,7 @@
 		60B7BC3629CF51F8008E6A41 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B7BC3529CF51F8008E6A41 /* CustomTableViewCell.swift */; };
 		60C48A7129D0606200C911B1 /* CustomBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C48A7029D0606200C911B1 /* CustomBottomSheet.swift */; };
 		60C48A7329D061FA00C911B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C48A7229D061FA00C911B1 /* Constants.swift */; };
+		60C70F0629D4550E003424FA /* ExerciseInstructionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C70F0529D4550E003424FA /* ExerciseInstructionSheetView.swift */; };
 		60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF05298FED43002A7619 /* AlarmSettingsView.swift */; };
 		60FCEF08298FED5B002A7619 /* InfoOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */; };
 		60FCEF0A298FED61002A7619 /* CreateNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FCEF09298FED61002A7619 /* CreateNotificationView.swift */; };
@@ -55,6 +56,7 @@
 		60B7BC3529CF51F8008E6A41 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		60C48A7029D0606200C911B1 /* CustomBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomSheet.swift; sourceTree = "<group>"; };
 		60C48A7229D061FA00C911B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		60C70F0529D4550E003424FA /* ExerciseInstructionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInstructionSheetView.swift; sourceTree = "<group>"; };
 		60FCEF05298FED43002A7619 /* AlarmSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingsView.swift; sourceTree = "<group>"; };
 		60FCEF07298FED5B002A7619 /* InfoOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoOverlayView.swift; sourceTree = "<group>"; };
 		60FCEF09298FED61002A7619 /* CreateNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNotificationView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				606D825429CC854E00AD4B95 /* Componenet */,
 				6054FC5C29824AB700059CD3 /* WorkoutView.swift */,
 				602E8D9929BB02BD00D494DC /* ExerciseView.swift */,
+				60C70F0529D4550E003424FA /* ExerciseInstructionSheetView.swift */,
 				602E8D9D29BCCF5300D494DC /* WorkoutSummaryView.swift */,
 				606D825229CC7EA700AD4B95 /* PrepareExerciseView.swift */,
 				60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */,
@@ -290,6 +293,7 @@
 				60B7BC3429CF33A6008E6A41 /* ExerciseListModalView.swift in Sources */,
 				609D4DEA2969357E009B2381 /* MoveYourBodyApp.swift in Sources */,
 				4BE0B8E9299F875E001B6BB3 /* OnBoardingView.swift in Sources */,
+				60C70F0629D4550E003424FA /* ExerciseInstructionSheetView.swift in Sources */,
 				60879F0E29CD54A700FA6479 /* View+Extensions.swift in Sources */,
 				60C48A7129D0606200C911B1 /* CustomBottomSheet.swift in Sources */,
 				60FCEF06298FED43002A7619 /* AlarmSettingsView.swift in Sources */,

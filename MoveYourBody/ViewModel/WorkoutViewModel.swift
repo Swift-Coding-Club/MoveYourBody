@@ -24,47 +24,47 @@ final class WorkoutViewModel: NSObject, ObservableObject {
     @Published var selectedWorkouts: [Workout] = []
     
     private var workouts: [Workout] = [
-        Workout(workoutName: "얼터네이팅 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody),
-        Workout(workoutName: "점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"], bodyPart: .lowerBody),
-        Workout(workoutName: "바스켓볼", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["basketBall_1", "basketBall_2"], bodyPart: .lowerBody),
+        Workout(workoutName: "교대 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody, instructions: Constants.alternativeDumbbelSwingInstructions, considerations: Constants.alternativeDumbbelSwingConsiderations),
+        Workout(workoutName: "변형 점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"], bodyPart: .lowerBody, instructions: Constants.jumpingJackInstructions, considerations: Constants.jumpingJackConsiderations),
+        Workout(workoutName: "배스킷볼 샷", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["basketBall_1", "basketBall_2"], bodyPart: .lowerBody, instructions: Constants.basketBallInstructions, considerations: Constants.basketBallConsiderations),
         Workout(workoutName: "하이 니", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["highKnee_1", "highKnee_2"], bodyPart: .lowerBody),
+                    ["highKnee_1", "highKnee_2"], bodyPart: .lowerBody, instructions: Constants.highKneeInstructions, considerations: Constants.highKneeConsiderations),
         Workout(workoutName: "런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["lunge_1", "lunge_2"], bodyPart: .lowerBody),
-        Workout(workoutName: "사이드 런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["sideLunge_base", "sideLunge_left", "sideLunge_base", "sideLunge_right"], bodyPart: .lowerBody),
+                    ["lunge_1", "lunge_2"], bodyPart: .lowerBody, instructions: Constants.lungeInstructions, considerations: Constants.lungeConsiderations),
+        Workout(workoutName: "교대 사이드 런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["sideLunge_base", "sideLunge_left", "sideLunge_base", "sideLunge_right"], bodyPart: .lowerBody, instructions: Constants.alternatingSideLungeInstructions, considerations: Constants.alternatingSideLungeConsiderations),
         Workout(workoutName: "스케이터 토 터치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["skaterToeTouch_1", "skaterToeTouch_2"], bodyPart: .lowerBody),
+                    ["skaterToeTouch_1", "skaterToeTouch_2"], bodyPart: .lowerBody, instructions: Constants.skaterToeTouchInstructions, considerations: Constants.skaterToeTouchConsiderations),
         Workout(workoutName: "스쿼트", workoutSets: 2, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["squat_1", "squat_2"], bodyPart: .lowerBody),
+                    ["squat_1", "squat_2"], bodyPart: .lowerBody, instructions: Constants.squatInstructions, considerations: Constants.squatConsiderations),
         Workout(workoutName: "스탠딩 크런치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["standingCrunch_basic", "standingCrunch_left", "standingCrunch_basic", "standingCrunch_right"], bodyPart: .lowerBody),
+                    ["standingCrunch_basic", "standingCrunch_left", "standingCrunch_basic", "standingCrunch_right"], bodyPart: .lowerBody, instructions: Constants.standingCrunchInstructions, considerations: Constants.standingCrunchConsiderations),
         Workout(workoutName: "하프스쿼트 잽 크로스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["halfSquatJabCross_1", "halfSquatJabCross_2"], bodyPart: .lowerBody),
+                    ["halfSquatJabCross_1", "halfSquatJabCross_2"], bodyPart: .lowerBody, instructions: Constants.halfSquatJabCrossInstructions, considerations: Constants.halfSquatJabCrossConsiderations),
         
-        Workout(workoutName: "밸런스 찹 업", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["balanceChopUp_1", "balanceChopUp_2"], bodyPart: .upperBody),
+        Workout(workoutName: "밸런스 찹", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["balanceChopUp_1", "balanceChopUp_2"], bodyPart: .upperBody, instructions: Constants.balanceChopInstructions, considerations: Constants.balanceChopConsiderations),
         Workout(workoutName: "암 서클", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["armCircles"], bodyPart: .upperBody),
+                    ["armCircles"], bodyPart: .upperBody, instructions: Constants.armCircleInstructions, considerations: Constants.armCircleConsiderations),
         Workout(workoutName: "원 암 트라이셉 킥백", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["oneArmTricepsKickback_1", "oneArmTricepsKickback_2"], bodyPart: .upperBody),
+                    ["oneArmTricepsKickback_1", "oneArmTricepsKickback_2"], bodyPart: .upperBody, instructions: Constants.oneArmTricepsKickbackInstructions, considerations: Constants.oneArmTricepsKickbackConsiderations),
         Workout(workoutName: "스모 사이드 벤드", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["sumoSideBends_1", "sumoSideBends_2"], bodyPart: .upperBody),
+                    ["sumoSideBends_1", "sumoSideBends_2"], bodyPart: .upperBody, instructions: Constants.sumoSideBendInstructions, considerations: Constants.sumoSideBendConsiderations),
         Workout(workoutName: "트라이셉 킥백", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["tricepsKickback_1", "tricepsKickback_2"], bodyPart: .upperBody),
+                    ["tricepsKickback_1", "tricepsKickback_2"], bodyPart: .upperBody, instructions: Constants.tricepsKickbackInstructions, considerations: Constants.tricepsKickbackConsiderations),
         Workout(workoutName: "굿모닝", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["goodmorning_1", "goodmorning_2"], bodyPart: .upperBody),
+                    ["goodmorning_1", "goodmorning_2"], bodyPart: .upperBody, instructions: Constants.goodMorningIntroductions, considerations: Constants.goodMorningConsiderations),
         Workout(workoutName: "스탠딩 체스트 플라이", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["standingChestFly_1", "standingChestFly_2"], bodyPart: .upperBody),
+                    ["standingChestFly_1", "standingChestFly_2"], bodyPart: .upperBody, instructions: Constants.standingChestFlyIntroductions, considerations: Constants.standingChestFlyConsiderations),
         Workout(workoutName: "아놀드 숄더 프레스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["arnoldShoulderPress_1", "arnoldShoulderPress_2"], bodyPart: .upperBody),
+                    ["arnoldShoulderPress_1", "arnoldShoulderPress_2"], bodyPart: .upperBody, instructions: Constants.arnoldShoulderPressIntroductions, considerations: Constants.arnoldShoulderPressConsiderations),
         Workout(workoutName: "벤트 오버 로우 프레스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["bentOverRowPress_1", "bentOverRowPress_2", "bentOverRowPress_3"], bodyPart: .upperBody),
+                    ["bentOverRowPress_1", "bentOverRowPress_2", "bentOverRowPress_3"], bodyPart: .upperBody, instructions: Constants.bentOverRowPressIntroductions, considerations: Constants.bentOverRowPressConsiderations),
         Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody),
+                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody, instructions: Constants.bentOverLateralRaiseIntroductions, considerations: Constants.bentOverLateralRaiseConsiderations),
     ]
     
     private var currentImageIndex = 0
@@ -201,11 +201,9 @@ final class WorkoutViewModel: NSObject, ObservableObject {
     
     // 운동 설명 오디오 재생하기
     func startDescriptionAudioPlay() {
-        let audioData: Data
-        if NSDataAsset(name: currentExerciseName)?.data == nil {
-            audioData = NSDataAsset(name: "굿모닝")!.data
-        } else {
-            audioData = NSDataAsset(name: currentExerciseName)!.data
+        guard let audioData = NSDataAsset(name: currentExerciseName)?.data else {
+            debugPrint("no asset named \(currentExerciseName)")
+            return
         }
         
         do {
@@ -252,7 +250,6 @@ extension WorkoutViewModel: AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isAudioPlayingFinished = true
-//        audioPlayer = nil
     }
     
 }

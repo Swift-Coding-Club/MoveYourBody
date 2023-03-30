@@ -19,5 +19,7 @@ struct Workout: Identifiable, Hashable {
     let exerciseCountInSet: Int // 한 세트당 몇 번 운동할지 정하기
     let restTimeBetweenSets: Int // 세트 사이 쉬는 시간 설정
     let workoutImageNames: [String] // 운동 이미지 이름들
-    let bodyPart: BodyParts
+    let bodyPart: BodyParts // 상체인가 하체인가
+    let instructions: String // 운동 설명
+    let considerations: String // 운동 주의사항
 }
