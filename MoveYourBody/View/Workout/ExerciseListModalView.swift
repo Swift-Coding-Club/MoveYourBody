@@ -14,8 +14,23 @@ struct ExerciseListModalView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                ForEach(workouts, id: \.id) { workout in
-                    CustomTableViewCell(imageNames: workout.workoutImageNames, exerciseName: workout.workoutName, instructions: workout.instructions, considerations: workout.considerations)
+                ForEach(Array(zip(workouts.indices, workouts)), id: \.1) { index, workout in
+                    VStack(spacing: 0) {
+                        HStack {
+                            if index == 0 {
+                                Text("현재 동작")
+                            } else if index == workouts.count - 1 {
+                                Text("마지막 동작")
+                            } else {
+                                Text("다음 동작")
+                            }
+                            Spacer()
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 25, bottom: 5, trailing: 0))
+                        .foregroundColor(.white)
+                        
+                        CustomTableViewCell(imageNames: workout.workoutImageNames, exerciseName: workout.workoutName, instructions: workout.instructions, considerations: workout.considerations)
+                    }
                 }
             }
             .background(Color("sheetBackground"))
@@ -36,6 +51,11 @@ struct ExerciseListModalView_Previews: PreviewProvider {
         ExerciseListModalView(workouts: .constant([
             Workout(workoutName: "얼터네이팅 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
                         ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody, instructions: Constants.alternativeDumbbelSwingInstructions, considerations: Constants.alternativeDumbbelSwingConsiderations),
+            Workout(workoutName: "얼터네이팅 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                        ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody, instructions: Constants.alternativeDumbbelSwingInstructions, considerations: Constants.alternativeDumbbelSwingConsiderations),
+            Workout(workoutName: "얼터네이팅 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                        ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody, instructions: Constants.alternativeDumbbelSwingInstructions, considerations: Constants.alternativeDumbbelSwingConsiderations),
+            
         ]))
     }
 }

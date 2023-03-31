@@ -71,10 +71,12 @@ struct WorkoutView: View {
         }
         .statusBarHidden(true)
         .onTapGesture {
-            withAnimation(.spring()) {
-                self.isViewTapped.toggle()
+            if self.workoutViewModel.isExercising || self.workoutViewModel.isPreparingTime {
+                withAnimation(.spring()) {
+                    self.isViewTapped.toggle()
+                }
+                self.workoutViewModel.isWorkoutPaused.toggle()
             }
-            self.workoutViewModel.isWorkoutPaused.toggle()
             
             if self.workoutViewModel.isPreparingTime && !self.workoutViewModel.isAudioPlayingFinished {
                 if self.workoutViewModel.isWorkoutPaused {

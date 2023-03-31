@@ -162,6 +162,7 @@ final class WorkoutViewModel: NSObject, ObservableObject {
                         // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
                     } else {
                         timer.invalidate()
+                        self.selectedWorkouts.remove(at: 0)
                         self.currentCount = 0
                         self.isExercising = false
                         self.isPreparingTime = true

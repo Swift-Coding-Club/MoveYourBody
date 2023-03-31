@@ -81,9 +81,9 @@
 				6054FC5C29824AB700059CD3 /* WorkoutView.swift */,
 				602E8D9929BB02BD00D494DC /* ExerciseView.swift */,
 				60C70F0529D4550E003424FA /* ExerciseInstructionSheetView.swift */,
+				60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */,
 				602E8D9D29BCCF5300D494DC /* WorkoutSummaryView.swift */,
 				606D825229CC7EA700AD4B95 /* PrepareExerciseView.swift */,
-				60B7BC3329CF33A6008E6A41 /* ExerciseListModalView.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
