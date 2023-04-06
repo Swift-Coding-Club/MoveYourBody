@@ -65,13 +65,18 @@ struct CreateNotificationView: View {
         } label: {
             Text("Create")
                 .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
+                .frame(width: 240)
+                .foregroundColor(.white)
+                //.contentShape(Rectangle())
         }
         .padding()
-        .background(Color("buttonBackgroundStart"))
+        //.background(Color("buttonBackgroundStart"))
         .cornerRadius(5)
         .buttonStyle(PlainButtonStyle())
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        )
     }
 }
 

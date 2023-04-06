@@ -117,19 +117,21 @@ struct AlarmSettingsView: View {
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
                 } label: {
-                    Text("add")
-                    //.imageScale(.large)
-                        .foregroundColor(.white)
+                    Image(systemName: "plus.circle")
+                        .font(.system(size: 22))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(red: 119/255, green: 235/255, blue: 79/255))
                     
                 })
                 .navigationTitle("운동 알림")
                 
-                .padding(.horizontal, 16)
+                .padding(16)
             }
         } .navigationBarBackButtonHidden()
         
     }
 }
+
 
 extension AlarmSettingsView {
     func delete(_ indexSet: IndexSet) {
