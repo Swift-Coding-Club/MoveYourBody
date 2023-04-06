@@ -117,7 +117,7 @@ struct AlarmSettingsView: View {
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
                 } label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "plus")
                         .font(.system(size: 22))
                         .fontWeight(.bold)
                         .foregroundColor(Color(red: 119/255, green: 235/255, blue: 79/255))
