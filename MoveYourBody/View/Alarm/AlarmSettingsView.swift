@@ -61,48 +61,58 @@ struct AlarmSettingsView: View {
             }.navigationBarBackButtonHidden(true)
         }
     }
+
     
     var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            VStack(spacing: 70) {
-                List {
-                    ForEach(notificationManager.notifications, id: \.identifier) { notification in
-                        HStack {
-                            Text(timeDisplayText(from: notification))
-                                .fontWeight(.bold)
-                                .foregroundColor(.gray)
-                            Spacer()
-                            Text(notification.content.title)
-                                .hidden()
-                                .fontWeight(.semibold)
+        NavigationView {
+            ZStack {
+                Color("background")
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 80) {
+                    List {
+                        ForEach(notificationManager.notifications, id: \.identifier) { notification in
+                            HStack {
+                                Text(timeDisplayText(from: notification))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                Text(notification.content.title)
+                                    .hidden()
+                                    .fontWeight(.semibold)
+                            }
+                            
                         }
-                        
+                        .onDelete(perform: delete)
                     }
-                    .onDelete(perform: delete)
-                }
-                .scrollContentBackground(.hidden)
-                .background(.black)
-                .listStyle(InsetGroupedListStyle())
-                .overlay(infoOverlayView)
-                .navigationTitle("운동 알림")
-                .onAppear(perform: notificationManager.reloadAuthorizationStatus)
-                .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
-                    switch authorizationStatus {
-                    case .notDetermined:
-                        notificationManager.requestAuthorization()
-                    case .authorized:
-                        notificationManager.reloadLocalNotifications()
-                        break
-                    default:
-                        break
+                    .scrollContentBackground(.hidden)
+                    .listStyle(DefaultListStyle())
+                    .overlay(infoOverlayView)
+                    .onAppear(perform: notificationManager.reloadAuthorizationStatus)
+                    .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
+                        switch authorizationStatus {
+                        case .notDetermined:
+                            notificationManager.requestAuthorization()
+                        case .authorized:
+                            notificationManager.reloadLocalNotifications()
+                            break
+                        default:
+                            break
+                        }
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                        notificationManager.reloadAuthorizationStatus()
+                    }
+                    
+                    .sheet(isPresented: $isCreatePresented) {
+                        NavigationView {
+                            CreateNotificationView(
+                                notificationManager: notificationManager,
+                                isPresented: $isCreatePresented)
+                        }
                     }
                 }
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                    notificationManager.reloadAuthorizationStatus()
-                }
+                
                 .navigationBarItems(leading: btnBack)
                 .navigationBarItems(trailing: Button {
                     isCreatePresented = true
@@ -112,17 +122,12 @@ struct AlarmSettingsView: View {
                         .foregroundColor(.white)
                     
                 })
-                .navigationBarBackButtonHidden(true)
-                .sheet(isPresented: $isCreatePresented) {
-                    NavigationView {
-                        CreateNotificationView(
-                            notificationManager: notificationManager,
-                            isPresented: $isCreatePresented)
-                    }
-                }
+                .navigationTitle("운동 알림")
+                
                 .padding(.horizontal, 16)
             }
-        }
+        } .navigationBarBackButtonHidden()
+        
     }
 }
 

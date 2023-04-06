@@ -14,7 +14,7 @@ struct CreateNotificationView: View {
     
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color("background").ignoresSafeArea()
             
             VStack(spacing: 16) {
                         DatePicker("", selection: $date, displayedComponents: [.hourAndMinute])
@@ -31,15 +31,13 @@ struct CreateNotificationView: View {
 
                         createButton()
                     }
-                    .background(.black)
-                    .padding(.horizontal, 32)
+                    .padding(.horizontal, 16)
             
             .scrollContentBackground(.hidden)
-            .background(.black)
             .onDisappear {
                 notificationManager.reloadLocalNotifications()
             }
-            .navigationTitle("New Alarm")
+            .navigationTitle("새로운 알람")
             .navigationBarItems(trailing: Button {
                 isPresented = false
             } label: {
@@ -76,9 +74,6 @@ struct CreateNotificationView: View {
         .buttonStyle(PlainButtonStyle())
     }
 }
-
-
-
 
 struct CreateNotificationView_Previews: PreviewProvider {
     static var previews: some View {
