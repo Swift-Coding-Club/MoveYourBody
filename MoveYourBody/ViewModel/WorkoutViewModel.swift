@@ -9,51 +9,75 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
-final class WorkoutViewModel: ObservableObject {
+final class WorkoutViewModel: NSObject, ObservableObject {
     
     @Published var currentImageName = ""
-    @Published var currentKoreanCount = "준비"
-    @Published var currentCount = 10
+    @Published var currentCount = 0
     @Published var currentExerciseName = ""
-    @Published var workoutNames = [String]()
-    @Published var isWorkoutStopped = false
     @Published var nextExerciseName = ""
-    @Published var isRestTime = false
-    @Published var isWorkoutStarted = false
-    @Published var isWorkoutEnded = false
     
-    private let speechSynthesizer = AVSpeechSynthesizer()
-    private var currentImageIndex = 0
-    private var currentWorkoutIndex = 0
+    @Published var isExercising = false
+    @Published var isPreparingTime = true
+    @Published var isWorkoutStopped = false
+    @Published var isWorkoutPaused = false
+    @Published var isAudioPlayingFinished = false
+    @Published var selectedWorkouts: [Workout] = []
     
     private var workouts: [Workout] = [
-        Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody),
-        Workout(workoutName: "점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"], bodyPart: .lowerBody),
-        Workout(workoutName: "바스켓볼", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["basketBall_1", "basketBall_2"], bodyPart: .lowerBody),
-        Workout(workoutName: "굿모닝", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["goodmorning_1", "goodmorning_2"], bodyPart: .upperBody),
+        Workout(workoutName: "교대 덤벨 스윙", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["alternatingDumbbelSwing_base", "alternatingDumbbelSwing_left", "alternatingDumbbelSwing_base", "alternatingDumbbelSwing_right"], bodyPart: .lowerBody, instructions: Constants.alternativeDumbbelSwingInstructions, considerations: Constants.alternativeDumbbelSwingConsiderations),
+        Workout(workoutName: "변형 점핑잭", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["jumpingJack_basic", "jumpingJack_left", "jumpingJack_basic", "jumpingJack_right"], bodyPart: .lowerBody, instructions: Constants.jumpingJackInstructions, considerations: Constants.jumpingJackConsiderations),
+        Workout(workoutName: "배스킷볼 샷", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["basketBall_1", "basketBall_2"], bodyPart: .lowerBody, instructions: Constants.basketBallInstructions, considerations: Constants.basketBallConsiderations),
         Workout(workoutName: "하이 니", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["highKnee_1", "highKnee_2"], bodyPart: .lowerBody),
+                    ["highKnee_1", "highKnee_2"], bodyPart: .lowerBody, instructions: Constants.highKneeInstructions, considerations: Constants.highKneeConsiderations),
         Workout(workoutName: "런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["lunge_1", "lunge_2"], bodyPart: .lowerBody),
-        Workout(workoutName: "사이드 런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["sideLunge_base", "sideLunge_left", "sideLunge_base", "sideLunge_right"], bodyPart: .lowerBody),
+                    ["lunge_1", "lunge_2"], bodyPart: .lowerBody, instructions: Constants.lungeInstructions, considerations: Constants.lungeConsiderations),
+        Workout(workoutName: "교대 사이드 런지", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["sideLunge_base", "sideLunge_left", "sideLunge_base", "sideLunge_right"], bodyPart: .lowerBody, instructions: Constants.alternatingSideLungeInstructions, considerations: Constants.alternatingSideLungeConsiderations),
         Workout(workoutName: "스케이터 토 터치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["skaterToeTouch_1", "skaterToeTouch_2"], bodyPart: .lowerBody),
+                    ["skaterToeTouch_1", "skaterToeTouch_2"], bodyPart: .lowerBody, instructions: Constants.skaterToeTouchInstructions, considerations: Constants.skaterToeTouchConsiderations),
         Workout(workoutName: "스쿼트", workoutSets: 2, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["squat_1", "squat_2"], bodyPart: .lowerBody),
+                    ["squat_1", "squat_2"], bodyPart: .lowerBody, instructions: Constants.squatInstructions, considerations: Constants.squatConsiderations),
         Workout(workoutName: "스탠딩 크런치", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
-                    ["standingCrunch_basic", "standingCrunch_left", "standingCrunch_basic", "standingCrunch_right"], bodyPart: .lowerBody)
+                    ["standingCrunch_basic", "standingCrunch_left", "standingCrunch_basic", "standingCrunch_right"], bodyPart: .lowerBody, instructions: Constants.standingCrunchInstructions, considerations: Constants.standingCrunchConsiderations),
+        Workout(workoutName: "하프스쿼트 잽 크로스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["halfSquatJabCross_1", "halfSquatJabCross_2"], bodyPart: .lowerBody, instructions: Constants.halfSquatJabCrossInstructions, considerations: Constants.halfSquatJabCrossConsiderations),
+        
+        Workout(workoutName: "밸런스 찹", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["balanceChopUp_1", "balanceChopUp_2"], bodyPart: .upperBody, instructions: Constants.balanceChopInstructions, considerations: Constants.balanceChopConsiderations),
+        Workout(workoutName: "암 서클", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["armCircles"], bodyPart: .upperBody, instructions: Constants.armCircleInstructions, considerations: Constants.armCircleConsiderations),
+        Workout(workoutName: "원 암 트라이셉 킥백", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["oneArmTricepsKickback_1", "oneArmTricepsKickback_2"], bodyPart: .upperBody, instructions: Constants.oneArmTricepsKickbackInstructions, considerations: Constants.oneArmTricepsKickbackConsiderations),
+        Workout(workoutName: "스모 사이드 벤드", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["sumoSideBends_1", "sumoSideBends_2"], bodyPart: .upperBody, instructions: Constants.sumoSideBendInstructions, considerations: Constants.sumoSideBendConsiderations),
+        Workout(workoutName: "트라이셉 킥백", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["tricepsKickback_1", "tricepsKickback_2"], bodyPart: .upperBody, instructions: Constants.tricepsKickbackInstructions, considerations: Constants.tricepsKickbackConsiderations),
+        Workout(workoutName: "굿모닝", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["goodmorning_1", "goodmorning_2"], bodyPart: .upperBody, instructions: Constants.goodMorningIntroductions, considerations: Constants.goodMorningConsiderations),
+        Workout(workoutName: "스탠딩 체스트 플라이", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["standingChestFly_1", "standingChestFly_2"], bodyPart: .upperBody, instructions: Constants.standingChestFlyIntroductions, considerations: Constants.standingChestFlyConsiderations),
+        Workout(workoutName: "아놀드 숄더 프레스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["arnoldShoulderPress_1", "arnoldShoulderPress_2"], bodyPart: .upperBody, instructions: Constants.arnoldShoulderPressIntroductions, considerations: Constants.arnoldShoulderPressConsiderations),
+        Workout(workoutName: "벤트 오버 로우 프레스", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["bentOverRowPress_1", "bentOverRowPress_2", "bentOverRowPress_3"], bodyPart: .upperBody, instructions: Constants.bentOverRowPressIntroductions, considerations: Constants.bentOverRowPressConsiderations),
+        Workout(workoutName: "벤트오버 레터럴레이즈", workoutSets: 3, exerciseCountInSet: 12, restTimeBetweenSets: 10, workoutImageNames:
+                    ["bentOverLateralRaise_1", "bentOverLateralRaise_2"], bodyPart: .upperBody, instructions: Constants.bentOverLateralRaiseIntroductions, considerations: Constants.bentOverLateralRaiseConsiderations),
     ]
     
-    init() {
-        
+    private var currentImageIndex = 0
+    private var currentWorkoutIndex = -1
+    
+    private var workoutSettingsManager = WorkoutSettingsManager.shared
+    private var audioPlayer: AVAudioPlayer!
+    
+    override init() {
+        super.init()
         workouts = workouts.filter({ workout in
             // 상체운동 하고싶다면
-            if !WorkoutSettingsManager.shared.didTap4 {
+            if !workoutSettingsManager.selectUpperBody {
                 // 상체운동 파트면 true
                 if workout.bodyPart == .upperBody {
                     return true
@@ -61,7 +85,7 @@ final class WorkoutViewModel: ObservableObject {
             }
             
             // 하체운동 하고싶다면
-            if !WorkoutSettingsManager.shared.didTap5 {
+            if !workoutSettingsManager.selectLowerBody {
                 // 하체운동 파트면 true
                 if workout.bodyPart == .lowerBody {
                     return true
@@ -72,153 +96,161 @@ final class WorkoutViewModel: ObservableObject {
             return false
         })
         
-        print("noUpperBody : \(WorkoutSettingsManager.shared.didTap4)")
-        print("noLowerBody : \(WorkoutSettingsManager.shared.didTap5)")
-        print(workouts)
-        
         workouts.shuffle() // 랜덤 운동 나올 수 있도록 섞기
+        
+        // 시간에 따라 운동 갯수 설정하기
+        if workoutSettingsManager.selectFiveMinutes {
+            workouts.removeSubrange(5...(workouts.count-1))
+        } else if workoutSettingsManager.selectSevenMinutes {
+            workouts.removeSubrange(7...(workouts.count-1))
+        }
+        
+        workouts.forEach { workout in
+            selectedWorkouts.append(workout)
+        }
+        
+        print(selectedWorkouts)
         
         // publish 값 초기화
         currentImageName = workouts[0].workoutImageNames[0]
         currentExerciseName = workouts[0].workoutName
-        
-        // 셔플된 workout 이름들 배열에 넣기
-        for workout in workouts {
-            workoutNames.append(workout.workoutName)
-        }
-        
-        // tts 위한 AVAudioSession 초기화
-        do{
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        }
-        catch
-        {
-            print("Fail to enable session")
-        }
-    }
-    
-    // 운동 준비하기
-    func prepareWorkout() {
-        // 5초 준비 화면 보여준 후 운동 시작하기
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-            self.isWorkoutStarted = true
-        }
     }
     
     // 한 운동마다 불리는 일회성 메서드
     func startExercise() {
-        var count = 1
+        self.currentCount = 0
         
         // 1.5초마다 이미지 바꾸기
         Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
-            if self.isWorkoutStopped {
-                timer.invalidate()
-                self.currentImageIndex = 0
+            if !self.isWorkoutPaused {
+                if self.isWorkoutStopped {
+                    timer.invalidate()
+                    self.currentImageIndex = 0
+                    self.stopWorkout()
+                }
+                
+                if self.isPreparingTime {
+                    timer.invalidate()
+                }
+                
+                let workoutImagesCount = self.workouts[self.currentWorkoutIndex].workoutImageNames.count
+                self.currentImageIndex += 1
+                self.currentImageName = self.workouts[self.currentWorkoutIndex].workoutImageNames[self.currentImageIndex % workoutImagesCount]
             }
-            
-            let workoutImagesCount = self.workouts[self.currentWorkoutIndex].workoutImageNames.count
-            self.currentImageIndex += 1
-            self.currentImageName = self.workouts[self.currentWorkoutIndex].workoutImageNames[self.currentImageIndex % workoutImagesCount]
         }
         
-        // 3초마다 숫자 세기
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
-            if self.isWorkoutStopped {
-                timer.invalidate()
-                self.currentWorkoutIndex = 0
-                self.isWorkoutStopped = false
-            }
-            
-            self.speakCount(count)
-            count += 1
-           
-            // 설정 횟수 모두 도달하게 되면 Rest 하고 다음 인덱스로 넘어가기
-            if count == self.workouts[self.currentWorkoutIndex].exerciseCountInSet + 1 {
-                // 만약 마지막 운동이었다면 WorkoutSummary뷰 불러올 수 있도록 flag 변수 설정
-                if self.currentWorkoutIndex + 1 == self.workouts.count {
+        // 1초마다 숫자 세기
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if !self.isWorkoutPaused {
+                if self.isWorkoutStopped {
                     timer.invalidate()
-                    self.isWorkoutStarted = false
-                    self.isWorkoutEnded = true
-                // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
-                } else {
-                    timer.invalidate()
-                    self.currentKoreanCount = "준비"
-                    self.isRestTime = true
+                    self.currentWorkoutIndex = 0
+                    self.stopWorkout()
+                }
+                
+                self.currentCount += 1
+                
+                // 설정 횟수 모두 도달하게 되면 Rest 하고 다음 인덱스로 넘어가기
+                if self.currentCount == 45 {
+                    // 만약 마지막 운동이었다면 WorkoutSummary뷰 불러올 수 있도록 flag 변수 설정
+                    if self.currentWorkoutIndex + 1 == self.workouts.count {
+                        timer.invalidate()
+                        self.currentCount = 0
+                        self.isExercising = false
+                        self.isPreparingTime = false
+                        self.isWorkoutStopped = true
+                        // 마지막 운동이 아니라면 RestTimeView 불러올 수 있도록 flag 변수 설정
+                    } else {
+                        timer.invalidate()
+                        self.selectedWorkouts.remove(at: 0)
+                        self.currentCount = 0
+                        self.isExercising = false
+                        self.isPreparingTime = true
+                    }
                 }
             }
         }
     }
-   
-    // 쉬는 시간 시작
-    func startRest() {
+    
+    // 다음 운동 준비 시작
+    func startPrepare() {
         // 다음 운동 이름 설정
         currentWorkoutIndex += 1
-        nextExerciseName = workoutNames[currentWorkoutIndex]
+        nextExerciseName = workouts[self.currentWorkoutIndex].workoutName
         currentExerciseName = nextExerciseName
-       
-        // 쉬는 시간 10초 세기
-        currentCount = 10
+        startDescriptionAudioPlay()
+        // 쉬는 시간 15초 세기
+        currentCount = 15
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.currentCount == 0 {
-                timer.invalidate()
-                self.isRestTime = false
+            if !self.isWorkoutPaused{
+                if self.isWorkoutStopped {
+                    self.stopWorkout()
+                    timer.invalidate()
+                }
+                
+                if self.currentCount == 0 {
+                    self.isPreparingTime = false
+                    self.isExercising = true
+                    self.currentCount = 0
+                    timer.invalidate()
+                }
+                
+                self.currentCount -= 1
             }
-            self.currentCount -= 1
         }
+    }
+    
+    // 운동 설명 오디오 재생하기
+    func startDescriptionAudioPlay() {
+        guard let audioData = NSDataAsset(name: currentExerciseName)?.data else {
+            debugPrint("no asset named \(currentExerciseName)")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(data: audioData)
+            audioPlayer.delegate = self
+            isAudioPlayingFinished = false
+            audioPlayer.play()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    // 운동 설명 오디오 일시 정지
+    func pauseExerciseDescriptionAudio() {
+        guard let audioPlayer = audioPlayer else {
+            print("audioPlayer 없음")
+            return
+        }
+        audioPlayer.pause()
+    }
+    
+    // 운동 설명 오디오 재생
+    func resumeExerciseDescriptionAudio() {
+        guard let audioPlayer = audioPlayer else {
+            print("AudioPlayer 없음")
+            return
+        }
+        audioPlayer.play()
     }
     
     // 운동 멈추기
     func stopWorkout() {
         isWorkoutStopped = true
-        speechSynthesizer.pauseSpeaking(at: .immediate)  // speaking 중지
+        isPreparingTime = false
+        isExercising = false
+        guard let audioPlayer = audioPlayer else {
+            return
+        }
+        audioPlayer.stop()
+    }
+}
+
+extension WorkoutViewModel: AVAudioPlayerDelegate {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        isAudioPlayingFinished = true
     }
     
-    /// count로 들어오는 숫자 이름을 디바이스 스피커로 출력
-    /// - Parameter count: 출력할 숫자
-    func speakCount(_ count: Int) {
-        // 추후 숫자를 고유어 한글로 변환해주는 extension 제작해보자
-        print(count)
-        var koreanCount: String
-        
-        switch count {
-        case 1:
-            koreanCount = "하나"
-        case 2:
-            koreanCount = "둘"
-        case 3:
-            koreanCount = "셋"
-        case 4:
-            koreanCount = "넷"
-        case 5:
-            koreanCount = "다섯"
-        case 6:
-            koreanCount = "여섯"
-        case 7:
-            koreanCount = "일곱"
-        case 8:
-            koreanCount = "여덟"
-        case 9:
-            koreanCount = "아홉"
-        case 10:
-            koreanCount = "열"
-        case 11:
-            koreanCount = "열하나"
-        case 12:
-            koreanCount = "열둘"
-        case 13:
-            koreanCount = "열셋"
-        case 14:
-            koreanCount = "열넷"
-        case 15:
-            koreanCount = "열다섯"
-        default:
-            koreanCount = ""
-        }
-        
-        currentKoreanCount = koreanCount
-        let utterance = AVSpeechUtterance(string: koreanCount)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
-        speechSynthesizer.speak(utterance)
-    }
 }

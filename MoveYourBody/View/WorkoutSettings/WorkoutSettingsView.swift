@@ -95,37 +95,37 @@ struct WorkoutSettingsView: View {
                         }*/
                         HStack{
                             Button(action:{
-                                settings.didTap4.toggle()
-                                if settings.didTap4 == true && settings.didTap5 == true {
-                                    settings.didTap5.toggle()
+                                settings.selectUpperBody.toggle()
+                                if settings.selectUpperBody == true && settings.selectLowerBody == true {
+                                    settings.selectLowerBody.toggle()
                                 }
                             }){
                                 Text("상체")
-                                    .foregroundColor(settings.didTap4 ? .black: .white)
+                                    .foregroundColor(settings.selectUpperBody ? .black: .white)
                                     .padding()
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
                                     )
                             }
-                            .background(LinearGradient(gradient: settings.didTap4 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .background(LinearGradient(gradient: settings.selectUpperBody ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(20)
                             
                             Button(action:{
-                                settings.didTap5.toggle()
-                                if settings.didTap4 == true && settings.didTap5 == true {
-                                    settings.didTap4.toggle()
+                                settings.selectLowerBody.toggle()
+                                if settings.selectUpperBody == true && settings.selectLowerBody == true {
+                                    settings.selectUpperBody.toggle()
                                 }
                             }){
                                 Text("하체")
-                                    .foregroundColor(settings.didTap5 ? .black: .white)
+                                    .foregroundColor(settings.selectLowerBody ? .black: .white)
                                     .padding()
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
                                     )
                             }
-                            .background(LinearGradient(gradient: settings.didTap5 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .background(LinearGradient(gradient: settings.selectLowerBody ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(20)                        }
                     }
                     
@@ -136,37 +136,37 @@ struct WorkoutSettingsView: View {
                         
                         HStack{
                             Button(action:{
-                                settings.didTap6.toggle()
-                                if settings.didTap6 == true && settings.didTap7 == true {
-                                    settings.didTap7.toggle()
+                                settings.selectFiveMinutes.toggle()
+                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
+                                    settings.selectSevenMinutes.toggle()
                                 }
                             }){
                                 Text("5분")
-                                    .foregroundColor(settings.didTap6 ? .black: .white)
+                                    .foregroundColor(settings.selectFiveMinutes ? .black: .white)
                                     .padding()
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
                                     )
                             }
-                            .background(LinearGradient(gradient: settings.didTap6 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .background(LinearGradient(gradient: settings.selectFiveMinutes ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(20)
                             
                             Button(action:{
-                                settings.didTap7.toggle()
-                                if settings.didTap6 == true && settings.didTap7 == true {
-                                    settings.didTap6.toggle()
+                                settings.selectSevenMinutes.toggle()
+                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
+                                    settings.selectFiveMinutes.toggle()
                                 }
                             }){
                                 Text("7분")
-                                    .foregroundColor(settings.didTap7 ? .black: .white)
+                                    .foregroundColor(settings.selectSevenMinutes ? .black: .white)
                                     .padding()
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
                                     )
                             }
-                            .background(LinearGradient(gradient: settings.didTap7 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
+                            .background(LinearGradient(gradient: settings.selectSevenMinutes ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(20)
                         }
                         
