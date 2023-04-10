@@ -54,11 +54,27 @@ struct AlarmSettingsView: View {
         }
     }
     
-    var btnBack: some View{
+    var btnBack: some View {
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
-                Image("go-back")
-            }.navigationBarBackButtonHidden(true)
+                //Image("go-back")
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
+    var btnPlus: some View {
+        Button {
+            isCreatePresented = true
+        } label: {
+            Image(systemName: "plus")
+                .font(.system(size: 22))
+                .fontWeight(.bold)
+                .foregroundColor(Color(.white))
+            
         }
     }
 
@@ -114,15 +130,7 @@ struct AlarmSettingsView: View {
                 }
                 
                 .navigationBarItems(leading: btnBack)
-                .navigationBarItems(trailing: Button {
-                    isCreatePresented = true
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(red: 119/255, green: 235/255, blue: 79/255))
-                    
-                })
+                .navigationBarItems(trailing: btnPlus)
                 .navigationTitle("운동 알림")
                 
                 .padding(16)

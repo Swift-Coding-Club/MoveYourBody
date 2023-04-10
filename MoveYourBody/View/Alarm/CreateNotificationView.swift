@@ -12,6 +12,17 @@ struct CreateNotificationView: View {
     @State private var date = Date()
     @Binding var isPresented: Bool
     
+    var btnExit: some View {
+        Button {
+            isPresented = false
+        } label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 22))
+                .fontWeight(.bold)
+                .foregroundColor(Color(.white))
+            
+        }
+    }
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
@@ -38,13 +49,7 @@ struct CreateNotificationView: View {
                 notificationManager.reloadLocalNotifications()
             }
             .navigationTitle("새로운 알람")
-            .navigationBarItems(trailing: Button {
-                isPresented = false
-            } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-                    .foregroundColor(.white)
-            })
+            .navigationBarItems(trailing: btnExit)
         }
     }
     
