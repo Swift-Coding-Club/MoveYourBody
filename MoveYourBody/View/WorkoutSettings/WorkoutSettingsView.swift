@@ -136,9 +136,12 @@ struct WorkoutSettingsView: View {
                         
                         HStack{
                             Button(action:{
-                                settings.selectFiveMinutes.toggle()
-                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
+                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
                                     settings.selectSevenMinutes.toggle()
+                                }
+                                if(settings.selectSevenMinutes == true ){
+                                    settings.selectSevenMinutes.toggle()
+                                    settings.selectFiveMinutes.toggle()
                                 }
                             }){
                                 Text("5분")
@@ -153,9 +156,12 @@ struct WorkoutSettingsView: View {
                             .cornerRadius(20)
                             
                             Button(action:{
-                                settings.selectSevenMinutes.toggle()
-                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
+                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
                                     settings.selectFiveMinutes.toggle()
+                                }
+                                if(settings.selectFiveMinutes == true){
+                                    settings.selectFiveMinutes.toggle()
+                                    settings.selectSevenMinutes.toggle()
                                 }
                             }){
                                 Text("7분")
@@ -183,168 +189,6 @@ struct WorkoutSettingsView: View {
         
     }
 }
-////별도의 Save 버튼 없이 설정 사항이 저장됨.
-//    var body: some View {
-//        ZStack{
-//            Color("background")
-//                .ignoresSafeArea()
-//            VStack {
-//                ForEach(vm.filteredItems){
-//                    item in HStack{
-//                        Button(action:{
-//                            vm.toggleCheck(item: item)
-//                        }){
-//                            Text(item.title)
-//                                .font(.headline)
-//                        }
-//                        .foregroundColor(Color.black)
-//                        .font(.system(size:14).bold())
-//                        .padding(15)
-//                        .background(vm.contains(item) ? Color.green: Color.red)
-//                        
-//                    }
-//                }
-//            }
-//            
-//            
-//        }.navigationBarTitle("운동설정")
-//            .navigationBarItems(leading:
-//                                    btnBack, trailing: saveButton())
-//        
-//        
-//        .navigationBarBackButtonHidden(true)}
-//}
 
-@ViewBuilder
-func saveButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("Save")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
 
-@ViewBuilder
-func optionFirstButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("3분이하")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
 
-@ViewBuilder
-func mnFirstButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("스쿼트")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnSecondButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("플랭크")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnThirdButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("런지")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnFourthButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("허리 굽히기")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnFifthButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("무릎 굽히기")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func optionSecondButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("5분이하")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-struct OutlineButtonSytle: ButtonStyle{
-    static let neongreen=Color("neon-green")
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(OutlineButtonSytle.neongreen, lineWidth: 3)
-            )
-    }
-}
