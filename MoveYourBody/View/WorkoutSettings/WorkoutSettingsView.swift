@@ -50,49 +50,7 @@ struct WorkoutSettingsView: View {
                         Text("하고 싶지 않은 동작이 있나요?")
                             .font(.system(size: 20))
                             .fontWeight(.semibold)
-                        /*HStack{
-                            Button{
-                                settings.didTap1.toggle()
-                            }label:{
-                                Text("스쿼트")
-                                    .foregroundColor(settings.didTap1 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }//그래디언트 버튼 클릭 설정 backgroundColor(didTap1? LinearGradient~: Color("background")) > 타입 불일치 에러 ----> Color("background")를 사용할 때에도 gradient를 적용한 후 gradient에 didTap1 적용 > 다시 background 적용으로 해결
-                            .background(LinearGradient(gradient: settings.didTap1 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                            
-                            Button(action:{
-                                settings.didTap2.toggle()
-                            }){
-                                Text("플랭크")
-                                    .foregroundColor(settings.didTap2 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }
-                            .background(LinearGradient(gradient: settings.didTap2 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                            
-                            Button(action:{
-                                settings.didTap3.toggle()
-                            }){
-                                Text("런지")
-                                    .foregroundColor(settings.didTap3 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }
-                            .background(LinearGradient(gradient: settings.didTap3 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                        }*/
+                        
                         HStack{
                             Button(action:{
                                 settings.selectUpperBody.toggle()
@@ -137,7 +95,7 @@ struct WorkoutSettingsView: View {
                         HStack{
                             Button(action:{
                                 settings.selectFiveMinutes.toggle()
-                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
+                                if(settings.selectFiveMinutes == true && settings.selectSevenMinutes == true){
                                     settings.selectSevenMinutes.toggle()
                                 }
                             }){
@@ -154,9 +112,9 @@ struct WorkoutSettingsView: View {
                             
                             Button(action:{
                                 settings.selectSevenMinutes.toggle()
-                                if settings.selectFiveMinutes == true && settings.selectSevenMinutes == true {
-                                    settings.selectFiveMinutes.toggle()
-                                }
+                                if(settings.selectFiveMinutes == true && settings.selectSevenMinutes == true){
+                                settings.selectFiveMinutes.toggle()
+                            }
                             }){
                                 Text("7분")
                                     .foregroundColor(settings.selectSevenMinutes ? .black: .white)
@@ -183,168 +141,6 @@ struct WorkoutSettingsView: View {
         
     }
 }
-////별도의 Save 버튼 없이 설정 사항이 저장됨.
-//    var body: some View {
-//        ZStack{
-//            Color("background")
-//                .ignoresSafeArea()
-//            VStack {
-//                ForEach(vm.filteredItems){
-//                    item in HStack{
-//                        Button(action:{
-//                            vm.toggleCheck(item: item)
-//                        }){
-//                            Text(item.title)
-//                                .font(.headline)
-//                        }
-//                        .foregroundColor(Color.black)
-//                        .font(.system(size:14).bold())
-//                        .padding(15)
-//                        .background(vm.contains(item) ? Color.green: Color.red)
-//                        
-//                    }
-//                }
-//            }
-//            
-//            
-//        }.navigationBarTitle("운동설정")
-//            .navigationBarItems(leading:
-//                                    btnBack, trailing: saveButton())
-//        
-//        
-//        .navigationBarBackButtonHidden(true)}
-//}
 
-@ViewBuilder
-func saveButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("Save")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
 
-@ViewBuilder
-func optionFirstButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("3분이하")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
 
-@ViewBuilder
-func mnFirstButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("스쿼트")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnSecondButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("플랭크")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnThirdButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("런지")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnFourthButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("허리 굽히기")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func mnFifthButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("무릎 굽히기")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-@ViewBuilder
-func optionSecondButton() -> some View {
-    Button {
-        
-    } label: {
-        Text("5분이하")
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)       .stroke(OutlineButtonSytle.neongreen, lineWidth: 3))
-        
-    }
-}
-
-struct OutlineButtonSytle: ButtonStyle{
-    static let neongreen=Color("neon-green")
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(Color.white)
-            .font(.system(size:14).bold())
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(OutlineButtonSytle.neongreen, lineWidth: 3)
-            )
-    }
-}

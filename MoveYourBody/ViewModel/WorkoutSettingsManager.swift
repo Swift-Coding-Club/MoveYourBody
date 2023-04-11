@@ -24,7 +24,7 @@ final class WorkoutSettingsManager: ObservableObject {
         }
     }
     
-    @AppStorage("fiveMinutes") var selectFiveMinutes: Bool = false {
+    @AppStorage("fiveMinutes") var selectFiveMinutes: Bool = true {
         didSet {
             objectWillChange.send()
         }

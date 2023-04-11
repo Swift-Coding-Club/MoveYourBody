@@ -76,7 +76,7 @@ struct ScreenView: View {
                 .padding()
                 Spacer(minLength: 0)
                 
-                Image(systemName:image)
+                Image("iPhone_mockup")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                 
@@ -86,7 +86,7 @@ struct ScreenView: View {
                     .kerning(1.3)
                     .multilineTextAlignment(.center)
                 Spacer(minLength: 80)
-            }.background(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
+            }.background(Color.black)
         }
         
         .overlay(Button(action: {
