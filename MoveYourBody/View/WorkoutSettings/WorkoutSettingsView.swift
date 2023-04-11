@@ -137,7 +137,7 @@ struct WorkoutSettingsView: View {
                         HStack{
                             Button(action:{
                                 if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
-                                    settings.selectSevenMinutes.toggle()
+                                    settings.selectFiveMinutes=true
                                 }
                                 if(settings.selectSevenMinutes == true ){
                                     settings.selectSevenMinutes.toggle()
@@ -156,9 +156,9 @@ struct WorkoutSettingsView: View {
                             .cornerRadius(20)
                             
                             Button(action:{
-                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
-                                    settings.selectFiveMinutes.toggle()
-                                }
+//                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
+//                                    settings.selectFiveMinutes.toggle()
+//                                }
                                 if(settings.selectFiveMinutes == true){
                                     settings.selectFiveMinutes.toggle()
                                     settings.selectSevenMinutes.toggle()
