@@ -50,49 +50,7 @@ struct WorkoutSettingsView: View {
                         Text("하고 싶지 않은 동작이 있나요?")
                             .font(.system(size: 20))
                             .fontWeight(.semibold)
-                        /*HStack{
-                            Button{
-                                settings.didTap1.toggle()
-                            }label:{
-                                Text("스쿼트")
-                                    .foregroundColor(settings.didTap1 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }//그래디언트 버튼 클릭 설정 backgroundColor(didTap1? LinearGradient~: Color("background")) > 타입 불일치 에러 ----> Color("background")를 사용할 때에도 gradient를 적용한 후 gradient에 didTap1 적용 > 다시 background 적용으로 해결
-                            .background(LinearGradient(gradient: settings.didTap1 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                            
-                            Button(action:{
-                                settings.didTap2.toggle()
-                            }){
-                                Text("플랭크")
-                                    .foregroundColor(settings.didTap2 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }
-                            .background(LinearGradient(gradient: settings.didTap2 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                            
-                            Button(action:{
-                                settings.didTap3.toggle()
-                            }){
-                                Text("런지")
-                                    .foregroundColor(settings.didTap3 ? .black: .white)
-                                    .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color("buttonBackgroundStart"),lineWidth: 3)
-                                    )
-                            }
-                            .background(LinearGradient(gradient: settings.didTap3 ? Gradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")]) : Gradient(colors: [Color("background")]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(20)
-                        }*/
+                        
                         HStack{
                             Button(action:{
                                 settings.selectUpperBody.toggle()
@@ -136,12 +94,9 @@ struct WorkoutSettingsView: View {
                         
                         HStack{
                             Button(action:{
-                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
-                                    settings.selectFiveMinutes=true
-                                }
-                                if(settings.selectSevenMinutes == true ){
+                                settings.selectFiveMinutes.toggle()
+                                if(settings.selectFiveMinutes == true && settings.selectSevenMinutes == true){
                                     settings.selectSevenMinutes.toggle()
-                                    settings.selectFiveMinutes.toggle()
                                 }
                             }){
                                 Text("5분")
@@ -156,13 +111,10 @@ struct WorkoutSettingsView: View {
                             .cornerRadius(20)
                             
                             Button(action:{
-//                                if(settings.selectFiveMinutes == false && settings.selectSevenMinutes == false){
-//                                    settings.selectFiveMinutes.toggle()
-//                                }
-                                if(settings.selectFiveMinutes == true){
-                                    settings.selectFiveMinutes.toggle()
-                                    settings.selectSevenMinutes.toggle()
-                                }
+                                settings.selectSevenMinutes.toggle()
+                                if(settings.selectFiveMinutes == true && settings.selectSevenMinutes == true){
+                                settings.selectFiveMinutes.toggle()
+                            }
                             }){
                                 Text("7분")
                                     .foregroundColor(settings.selectSevenMinutes ? .black: .white)
