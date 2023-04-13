@@ -17,6 +17,7 @@ struct InfoOverlayView: View {
         VStack {
             Text(infoMessage)
                 .fontWeight(.bold)
+                .font(.system(size: 26))
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
@@ -30,6 +31,7 @@ struct InfoOverlayView: View {
             .padding()
             .background(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
             .cornerRadius(8)
+            
         }
     }
 }
