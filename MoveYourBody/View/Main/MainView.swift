@@ -14,7 +14,7 @@ struct MainView: View {
     var body: some View {
             ZStack{
                 if isFirstTimeVisited == true {
-                    MainScreen()
+                    OnBoardingView()//테스트용
                 } else {
                     OnBoardingView()
                    
@@ -90,7 +90,8 @@ struct MainScreen: View{
         NavigationLink(destination: AlarmSettingsView()){
             Image(systemName: "gearshape.fill")
                 .font(.system(size: 44, weight: .light))
-                .foregroundColor(Color("symbolForeground"))
+//                .foregroundColor(Color("symbolForeground"))
+                .foregroundStyle(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
         }.navigationBarHidden(true)
             .padding()
     }
