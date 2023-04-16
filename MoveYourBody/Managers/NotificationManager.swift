@@ -44,6 +44,8 @@ final class NotificationManager: ObservableObject {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let notificationContent = UNMutableNotificationContent()
+        
+        //타이틀이 없는 경우 알람이 오지 않는 오류 발생, 해결을 위해 임의의 타이틀 부여
         if title.isEmpty {
             notificationContent.title = "운동할 시간~"
         } else {

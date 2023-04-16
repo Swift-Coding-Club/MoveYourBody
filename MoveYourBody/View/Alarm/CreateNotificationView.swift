@@ -12,9 +12,20 @@ struct CreateNotificationView: View {
     @State private var date = Date()
     @Binding var isPresented: Bool
     
+    var btnExit: some View {
+        Button {
+            isPresented = false
+        } label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 22))
+                .fontWeight(.bold)
+                .foregroundColor(Color(.white))
+            
+        }
+    }
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color("background").ignoresSafeArea()
             
             VStack(spacing: 16) {
                         DatePicker("", selection: $date, displayedComponents: [.hourAndMinute])
@@ -31,22 +42,14 @@ struct CreateNotificationView: View {
 
                         createButton()
                     }
-                    .background(.black)
-                    .padding(.horizontal, 32)
+                    .padding(.horizontal, 16)
             
             .scrollContentBackground(.hidden)
-            .background(.black)
             .onDisappear {
                 notificationManager.reloadLocalNotifications()
             }
-            .navigationTitle("New Alarm")
-            .navigationBarItems(trailing: Button {
-                isPresented = false
-            } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-                    .foregroundColor(.white)
-            })
+            .navigationTitle("새로운 알람")
+            .navigationBarItems(trailing: btnExit)
         }
     }
     
@@ -67,18 +70,20 @@ struct CreateNotificationView: View {
         } label: {
             Text("Create")
                 .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
+                .frame(width: 240)
+                .foregroundColor(.white)
+                //.contentShape(Rectangle())
         }
         .padding()
-        .background(Color("buttonBackgroundStart"))
+        //.background(Color("buttonBackgroundStart"))
         .cornerRadius(5)
         .buttonStyle(PlainButtonStyle())
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        )
     }
 }
-
-
-
 
 struct CreateNotificationView_Previews: PreviewProvider {
     static var previews: some View {
