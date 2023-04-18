@@ -26,7 +26,10 @@ struct WorkoutSettingsView: View {
     var btnBack: some View{
         Button(action:{dismiss()}){
             HStack{
-                Image("go-back")
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
             }
         }
     }

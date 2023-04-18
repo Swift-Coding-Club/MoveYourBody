@@ -14,7 +14,7 @@ enum Walkthrough{
 
 struct OnBoardingView: View{
     @AppStorage("currentPage") var currentPage = 1
-    @AppStorage("signed_in") var currentUserSignedIn: Bool = true
+//    @AppStorage("signed_in") var currentUserSignedIn: Bool = true
     var body: some View{
         ZStack{
             if currentPage == 1 {
@@ -142,9 +142,9 @@ struct settingsOnboarding: View{
                     Spacer()
                     
                     
-                    Image(systemName: "gearshape.fill")
+                    Image(systemName: "bell.fill")
                         
-                        .font(.system(size: 25, weight: .regular))
+                        .font(.system(size: 20, weight: .regular))
                      .foregroundColor(.black)
                         .foregroundStyle(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
                         .padding(.bottom,30)

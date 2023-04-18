@@ -88,10 +88,10 @@ struct MainScreen: View{
     func settingsButton() -> some View {
         
         NavigationLink(destination: AlarmSettingsView()){
-            Image(systemName: "gearshape.fill")
-                .font(.system(size: 44, weight: .light))
-//                .foregroundColor(Color("symbolForeground"))
-                .foregroundStyle(LinearGradient(colors: [Color("buttonBackgroundStart"), Color("buttonBackgroundEnd")], startPoint: .topLeading, endPoint: .bottomTrailing))
+            Image(systemName: "bell.fill")
+                .font(.system(size: 36, weight: .light))
+               .foregroundColor(Color("symbolForeground"))
+             
         }.navigationBarHidden(true)
             .padding()
     }
@@ -104,6 +104,7 @@ struct MainScreen: View{
             Image(systemName: "figure.run")
                 .font(.system(size: 44, weight: .regular))
                 .foregroundColor(Color("symbolForeground"))
+                
         }
         .navigationBarHidden(true)
         .padding()

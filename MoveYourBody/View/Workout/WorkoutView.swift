@@ -96,7 +96,10 @@ struct WorkoutView: View {
             self.presentationMode.wrappedValue.dismiss()}
         ){
             HStack{
-                Image("go-back")
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 28))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
             }
         }
     }
