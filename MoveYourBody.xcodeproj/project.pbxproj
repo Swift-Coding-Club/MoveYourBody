@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4BE0B8E9299F875E001B6BB3 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE0B8E8299F875E001B6BB3 /* OnBoardingView.swift */; };
+		6021300329EFF7BE008A4567 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6021300229EFF7BE008A4567 /* Launch Screen.storyboard */; };
 		602E8D9329B8356200D494DC /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E8D9229B8356200D494DC /* WorkoutModel.swift */; };
 		602E8D9A29BB02BD00D494DC /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E8D9929BB02BD00D494DC /* ExerciseView.swift */; };
 		602E8D9E29BCCF5300D494DC /* WorkoutSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E8D9D29BCCF5300D494DC /* WorkoutSummaryView.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		4BE0B8E8299F875E001B6BB3 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		6021300229EFF7BE008A4567 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		602E8D9229B8356200D494DC /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		602E8D9929BB02BD00D494DC /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		602E8D9D29BCCF5300D494DC /* WorkoutSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSummaryView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				609D4DE92969357E009B2381 /* MoveYourBodyApp.swift */,
+				6021300229EFF7BE008A4567 /* Launch Screen.storyboard */,
 				B7543E1F299FA33E0053ECA6 /* Managers */,
 				6054FC59298246D700059CD3 /* Utilities */,
 				6054FC562982469600059CD3 /* Model */,
@@ -268,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6021300329EFF7BE008A4567 /* Launch Screen.storyboard in Resources */,
 				609D4DF12969357F009B2381 /* Preview Assets.xcassets in Resources */,
 				609D4DEE2969357F009B2381 /* Assets.xcassets in Resources */,
 			);
@@ -435,10 +439,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_CFBundleDisplayName = MYBD;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,10 +475,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_CFBundleDisplayName = MYBD;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
