@@ -57,7 +57,6 @@ struct AlarmSettingsView: View {
     var btnBack: some View {
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
-                //Image("go-back")
                 Image(systemName: "chevron.left")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
@@ -90,19 +89,17 @@ struct AlarmSettingsView: View {
                         ForEach(notificationManager.notifications, id: \.identifier) { notification in
                             HStack {
                                 Text(timeDisplayText(from: notification))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.gray)
-                                Spacer()
-                                Text(notification.content.title)
-                                    .hidden()
-                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color(.lightGray))
+                                    .font(.system(size: 40))
+                                
                             }
                             
                         }
                         .onDelete(perform: delete)
                     }
                     .scrollContentBackground(.hidden)
-                    .listStyle(DefaultListStyle())
+                    .listStyle(.plain)
+                    .listRowBackground(Color.clear) //알람 리스트 백그라운드 컬러 제거
                     .overlay(infoOverlayView)
                     .onAppear(perform: notificationManager.reloadAuthorizationStatus)
                     .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
