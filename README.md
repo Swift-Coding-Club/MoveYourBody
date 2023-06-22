@@ -1,6 +1,6 @@
 # **Move Your Body**
 
-<a href="http://github.com/nang518" taregt="_blank">👉  앱스토어</a>
+<a href="https://apps.apple.com/kr/app/moveyourbody/id6448321387" taregt="_blank">👉  앱스토어</a>
 
 ## 📌 프로젝트 소개
 
